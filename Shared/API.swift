@@ -15,6 +15,7 @@ struct Problem: Decodable, Hashable {
   let id: Int
   let prompt: String
   let formula: String
+  let hint: String
   let buttonTitles: [String]
   let answer: Int
 }
@@ -110,6 +111,20 @@ class API {
         }
       }
     }
+  }
+  
+  static func saveLastQuestion(sectionIndex: Int, problemIndex: Int) {
+    let keychain = KeychainSwift()
+    keychain.set("\(sectionIndex)", forKey: "lastSectionIndex")
+    keychain.set("\(problemIndex)", forKey: "lastProblemIndex")
+  }
+
+  static func getLastQuestion() -> [String:Int] {
+    let keychain = KeychainSwift()
+    if let sectionIndex = keychain.get("lastSectionIndex"), let problemIndex = keychain.get("lastProblemIndex") {
+      return ["sectionIndex": Int(sectionIndex) ?? 0, "problemIndex": Int(problemIndex) ?? 0]
+    }
+    return ["sectionIndex": 0, "problemIndex": 0]
   }
   
   static func printKeychain() {

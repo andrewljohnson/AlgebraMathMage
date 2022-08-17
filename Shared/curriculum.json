@@ -7,13 +7,15 @@
         "id": 0,
         "prompt": "What is the value X?",
         "formula": "3 - X = 1",
+        "hint": "This is the same as 3 - 1 = X. So what is X?",
         "buttonTitles": ["1", "2", "3"],
         "answer": 1
       },
       {
         "id": 1,
         "prompt": "What is the value of X?",
-        "formula": "1 + X = 1",
+        "formula": "1 + X = 2",
+        "hint": "This is the same as 2 - 1 = X. So what is X?",
         "buttonTitles": ["1", "2", "3"],
         "answer": 0
       },
@@ -21,6 +23,7 @@
         "id": 2,
         "prompt": "What would you call X in this formula?",
         "formula": "1 + X = 1",
+        "hint": "Variables are symbols in math that represent an amount. X is a variable.",
         "buttonTitles": ["a variable", "a florp", "a dorp"],
         "answer": 0
       }
@@ -34,6 +37,7 @@
         "id": 3,
         "prompt": "What is the value of X?",
         "formula": "9 - X = 1",
+        "hint": "This is the same as 9 - 1 = X. So what is X?",
         "buttonTitles": ["1", "8", "17"],
         "answer": 1
       },
@@ -41,6 +45,7 @@
         "id": 4,
         "prompt": "What is the value of X?",
         "formula": "17 - X = 11",
+        "hint": "This is the same as 17 - 11 = X. So what is X?",
         "buttonTitles": ["1", "2", "6"],
         "answer": 2
       }

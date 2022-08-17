@@ -28,6 +28,8 @@
 		4294A29728AC265B008BD756 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4294A29528AC265B008BD756 /* Strings.swift */; };
 		4294A29F28AD4ECE008BD756 /* KeychainSwiftDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4294A29E28AD4ECE008BD756 /* KeychainSwiftDistrib.swift */; };
 		4294A2A028AD4ECE008BD756 /* KeychainSwiftDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4294A29E28AD4ECE008BD756 /* KeychainSwiftDistrib.swift */; };
+		4294A2A228AD669E008BD756 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4294A2A128AD669E008BD756 /* Toast.swift */; };
+		4294A2A328AD669E008BD756 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4294A2A128AD669E008BD756 /* Toast.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,7 @@
 		4294A29228AC2576008BD756 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		4294A29528AC265B008BD756 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		4294A29E28AD4ECE008BD756 /* KeychainSwiftDistrib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainSwiftDistrib.swift; path = ../../../Downloads/KeychainSwiftDistrib.swift; sourceTree = "<group>"; };
+		4294A2A128AD669E008BD756 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +126,7 @@
 				4294A29228AC2576008BD756 /* Style.swift */,
 				4294A29528AC265B008BD756 /* Strings.swift */,
 				421FF85A28A9E7C9000AB2FC /* Assets.xcassets */,
+				4294A2A128AD669E008BD756 /* Toast.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -331,6 +335,7 @@
 				421FF88028A9E7C9000AB2FC /* AlgebraMathMageApp.swift in Sources */,
 				4294A29328AC2576008BD756 /* Style.swift in Sources */,
 				4294A29F28AD4ECE008BD756 /* KeychainSwiftDistrib.swift in Sources */,
+				4294A2A228AD669E008BD756 /* Toast.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +349,7 @@
 				421FF88128A9E7C9000AB2FC /* AlgebraMathMageApp.swift in Sources */,
 				4294A29428AC2576008BD756 /* Style.swift in Sources */,
 				4294A2A028AD4ECE008BD756 /* KeychainSwiftDistrib.swift in Sources */,
+				4294A2A328AD669E008BD756 /* Toast.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

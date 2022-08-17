@@ -9,12 +9,13 @@ import SwiftUI
 
 struct MainView: View {
   
-  @State var showMenu = false
-  @State var showMenuSectionList = false
-  @State var showMenuSection = -1
-
-  @State var sectionIndex = 0
-  @State var problemIndex = 0
+  @State private var showToast = false
+  @State private var showHint = false
+  @State private var showMenu = false
+  @State private var showMenuSectionList = false
+  @State private var showMenuSection = -1
+  @State private var sectionIndex = API.getLastQuestion()["sectionIndex"] ?? 0
+  @State private var problemIndex = API.getLastQuestion()["problemIndex"] ?? 0
   
   func checkAnswer (problems:[Any], answerChoice:Int, correctAnswer:Int) {
     if let sections = API.loadCurriculum() {
@@ -24,6 +25,10 @@ struct MainView: View {
       API.printKeychain()
       if (answerChoice == correctAnswer) {
         problemIndex += 1
+        showToast = true
+        showHint = false
+      } else {
+        showHint = true
       }
       if (problemIndex >= problems.count) {
         problemIndex = 0
@@ -33,7 +38,7 @@ struct MainView: View {
         }
       }
     }
-
+    API.saveLastQuestion(sectionIndex: sectionIndex, problemIndex: problemIndex)
   }
   
   var ProblemView: some View {
@@ -44,6 +49,7 @@ struct MainView: View {
       let correctAanswer = problem.answer
       let textPrompt = problem.prompt
       let textFormula =  problem.formula
+      let textHint = problem.hint
       let buttonTitles:[String] = problem.buttonTitles
       return AnyView(VStack {
         HStack {
@@ -101,8 +107,16 @@ struct MainView: View {
               .padding()
           }
         }
+        if (showHint) {
+          Text(textHint)
+        } else {
+          Text("")
+        }
         Spacer()
       }
+        .toast(message: "Correct, good job!",
+                     isShowing: $showToast,
+                     duration: Toast.short)
       )
     }
     return AnyView(EmptyView())
@@ -218,7 +232,7 @@ struct MainView: View {
 
 struct ContentView_Previews : PreviewProvider {
     static var previews: some View {
-        MainView(showMenu:true)
+        MainView()
           .previewInterfaceOrientation(.landscapeLeft)
   }
 }
