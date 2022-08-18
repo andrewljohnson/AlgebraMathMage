@@ -1,20 +1,16 @@
 PODS:
   - KeychainSwift (20.0.0)
-  - YouTubePlayer (0.7.2)
 
 DEPENDENCIES:
   - KeychainSwift (~> 20.0)
-  - YouTubePlayer
 
 SPEC REPOS:
   trunk:
     - KeychainSwift
-    - YouTubePlayer
 
 SPEC CHECKSUMS:
   KeychainSwift: 0ce6a4d13f7228054d1a71bb1b500448fb2ab837
-  YouTubePlayer: 2b5f2830d8f9b2cde942083211291e382c9e6bd5
 
-PODFILE CHECKSUM: 89879b834b1310fb132ccd7119fab1e43f8c6d1f
+PODFILE CHECKSUM: 5faf35cc0ac57f27d7f5b51c28d0f0a9454ebaf8
 
 COCOAPODS: 1.11.3

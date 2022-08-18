@@ -6,7 +6,6 @@ target 'AlgebraMathMage (iOS)' do
   use_frameworks!
 
   # Pods for AlgebraMathMage (iOS)
-  pod 'YouTubePlayer'
   pod 'KeychainSwift', '~> 20.0'
 
 end

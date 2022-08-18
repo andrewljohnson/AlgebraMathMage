@@ -19,6 +19,10 @@
 		421FF88428A9E7C9000AB2FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 421FF85A28A9E7C9000AB2FC /* Assets.xcassets */; };
 		421FF88528A9E7C9000AB2FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 421FF85A28A9E7C9000AB2FC /* Assets.xcassets */; };
 		422A948B28AEE1D000094E6F /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 422A948A28AEE1D000094E6F /* YouTubePlayerKit */; };
+		422A948D28AEE9AE00094E6F /* SectionCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422A948C28AEE9AE00094E6F /* SectionCompletionView.swift */; };
+		422A948E28AEE9AE00094E6F /* SectionCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422A948C28AEE9AE00094E6F /* SectionCompletionView.swift */; };
+		422A949028AEEAF200094E6F /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422A948F28AEEAF200094E6F /* MenuView.swift */; };
+		422A949128AEEAF200094E6F /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422A948F28AEEAF200094E6F /* MenuView.swift */; };
 		4294A28B28AC15AE008BD756 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4294A28A28AC15AE008BD756 /* Launch Screen.storyboard */; };
 		4294A28D28AC1C1C008BD756 /* curriculum.json in Resources */ = {isa = PBXBuildFile; fileRef = 4294A28C28AC1C1C008BD756 /* curriculum.json */; };
 		4294A28F28AC1D6C008BD756 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4294A28E28AC1D6C008BD756 /* API.swift */; };
@@ -65,6 +69,8 @@
 		421FF87828A9E7C9000AB2FC /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		421FF87C28A9E7C9000AB2FC /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		421FF87E28A9E7C9000AB2FC /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
+		422A948C28AEE9AE00094E6F /* SectionCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCompletionView.swift; sourceTree = "<group>"; };
+		422A948F28AEEAF200094E6F /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		4294A28A28AC15AE008BD756 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		4294A28C28AC1C1C008BD756 /* curriculum.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = curriculum.json; sourceTree = "<group>"; };
 		4294A28E28AC1D6C008BD756 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -152,6 +158,8 @@
 				4294A2A128AD669E008BD756 /* Toast.swift */,
 				4294A28C28AC1C1C008BD756 /* curriculum.json */,
 				421FF85A28A9E7C9000AB2FC /* Assets.xcassets */,
+				422A948C28AEE9AE00094E6F /* SectionCompletionView.swift */,
+				422A948F28AEEAF200094E6F /* MenuView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -459,7 +467,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				421FF88228A9E7C9000AB2FC /* MainView.swift in Sources */,
+				422A949028AEEAF200094E6F /* MenuView.swift in Sources */,
 				4294A28F28AC1D6C008BD756 /* API.swift in Sources */,
+				422A948D28AEE9AE00094E6F /* SectionCompletionView.swift in Sources */,
 				4294A29628AC265B008BD756 /* Strings.swift in Sources */,
 				421FF88028A9E7C9000AB2FC /* AlgebraMathMageApp.swift in Sources */,
 				4294A29328AC2576008BD756 /* Style.swift in Sources */,
@@ -472,7 +482,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				421FF88328A9E7C9000AB2FC /* MainView.swift in Sources */,
+				422A949128AEEAF200094E6F /* MenuView.swift in Sources */,
 				4294A29028AC1F17008BD756 /* API.swift in Sources */,
+				422A948E28AEE9AE00094E6F /* SectionCompletionView.swift in Sources */,
 				4294A29728AC265B008BD756 /* Strings.swift in Sources */,
 				421FF88128A9E7C9000AB2FC /* AlgebraMathMageApp.swift in Sources */,
 				4294A29428AC2576008BD756 /* Style.swift in Sources */,
