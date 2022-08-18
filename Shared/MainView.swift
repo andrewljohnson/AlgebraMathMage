@@ -7,6 +7,7 @@
 
 import KeychainSwift
 import SwiftUI
+import YouTubePlayerKit
 
 struct MainView: View {
   
@@ -18,6 +19,9 @@ struct MainView: View {
   @State private var showMenuSectionList = false
   @State private var showSectionCompletion = false
   @State private var showToast = false
+  @State private var showVideo = false
+
+  let youTubePlayer: YouTubePlayer = "https://youtube.com/watch?v=dQw4w9WgXcQ"
   
   func checkAnswer (problems:[Any], answerChoice:Int, correctAnswer:Int) {
     if let sections = API.loadCurriculum() {
@@ -50,7 +54,7 @@ struct MainView: View {
       let section = sections[sectionIndex]
       let problems = section.problems
       let problem = problems[problemIndex]
-      let correctAanswer = problem.answer
+      let correctAnswer = problem.answer
       let textPrompt = problem.prompt
       let textFormula =  problem.formula
       let textHint = problem.hint
@@ -77,6 +81,23 @@ struct MainView: View {
         }
           .padding()
           .background(Style.mainColor)
+        
+        Button(action:
+          withAnimation {
+            {
+              showVideo = true
+            }
+          }
+        )
+        {
+          HStack {
+              Image(systemName: "play")
+              Text("Play Helper Video")
+            }
+          .foregroundColor(Style.mainColor)
+          .frame(maxWidth: .infinity, alignment: .leading)
+          .padding()
+        }
         Spacer()
         Text(textPrompt)
           .padding()
@@ -93,7 +114,7 @@ struct MainView: View {
           ForEach(Array(buttonTitles.enumerated()), id: \.element) {
             answerChoice, title in
             Button(action:
-                    { withAnimation {checkAnswer(problems: problems, answerChoice: answerChoice, correctAnswer: correctAanswer)}})
+                    { withAnimation {checkAnswer(problems: problems, answerChoice: answerChoice, correctAnswer: correctAnswer)}})
               {
                 Text(title)
                   .fontWeight(.bold)
@@ -185,14 +206,14 @@ struct MainView: View {
               }
             }
           )
-            {
-              HStack {
-                  Image(systemName: "list.number")
-                  Text("Problems")
-                }
-              .frame(maxWidth: .infinity, alignment: .leading)
-              .padding()
-            }
+          {
+            HStack {
+                Image(systemName: "list.number")
+                Text("Problems")
+              }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding()
+          }
           // todo: remove when we implement a remote server
           #if DEBUG
           Button(action:
@@ -253,12 +274,36 @@ struct MainView: View {
 
   var body: some View {
     GeometryReader { geometry in
-        if (self.showSectionCompletion) {
+      if (self.showVideo) {
+        VStack {
+          Button(action:
+            withAnimation {
+              {
+                showVideo = false
+              }
+            }
+          )
+          {
+            HStack {
+                Image(systemName: "arrowshape.turn.up.backward.fill")
+                Text("Done")
+              }
+            .foregroundColor(Style.mainColor)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding()
+          }
+
+          YouTubePlayerView(self.youTubePlayer)
+            .onAppear { youTubePlayer.configuration = .init(
+              autoPlay: true
+            ) }
+        }
+
+      } else if (self.showSectionCompletion) {
           SectionCompletionView
             .transition(.scale)
         } else {
           ZStack(alignment: .leading) {
-           
           ProblemView
             .frame(width: self.showMenu ? geometry.size.width/4*3: geometry.size.width, height: geometry.size.height)
             .zIndex(1)

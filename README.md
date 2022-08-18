@@ -8,10 +8,10 @@ This is an app for iPad to teach kids math, egged on by lots of little videos.
 ### Todo Later/Maybe
 * Show chapter finish screen (when we have chapters))
 * Randomize answer order
+* Don't use both Swift packages and cocoapods?
 * Bugs
   * make reset data button animate
   * make transition back from section complete view into a scale transition 
-  * replace youtube library with something else, it has warnings in the code
   * limit usage to iPads in build
 
 
@@ -24,7 +24,6 @@ Install cocoapods, use that to install the pods, then run the app in XCode. Use 
 ### Install cocoapods
 ```
 brew install cocoapods
-pod setup --verbose
 ```
 
 ### Install pods
@@ -38,3 +37,9 @@ Since I am on Apple Silicon, I had to do this before using homebrew (https://sta
 ```
 eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
+
+## Note From YouTubePlayerKit README
+When submitting an app to the App Store which includes the YouTubePlayerKit, please ensure to add a link to the YouTube API Terms of Services in the review notes.
+
+https://developers.google.com/youtube/terms/api-services-terms-of-service
+

@@ -18,6 +18,7 @@
 		421FF88328A9E7C9000AB2FC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421FF85928A9E7C6000AB2FC /* MainView.swift */; };
 		421FF88428A9E7C9000AB2FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 421FF85A28A9E7C9000AB2FC /* Assets.xcassets */; };
 		421FF88528A9E7C9000AB2FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 421FF85A28A9E7C9000AB2FC /* Assets.xcassets */; };
+		422A948B28AEE1D000094E6F /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 422A948A28AEE1D000094E6F /* YouTubePlayerKit */; };
 		4294A28B28AC15AE008BD756 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4294A28A28AC15AE008BD756 /* Launch Screen.storyboard */; };
 		4294A28D28AC1C1C008BD756 /* curriculum.json in Resources */ = {isa = PBXBuildFile; fileRef = 4294A28C28AC1C1C008BD756 /* curriculum.json */; };
 		4294A28F28AC1D6C008BD756 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4294A28E28AC1D6C008BD756 /* API.swift */; };
@@ -85,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				422A948B28AEE1D000094E6F /* YouTubePlayerKit in Frameworks */,
 				A06B6B67D259A877F72435DD /* Pods_AlgebraMathMage__iOS_.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -220,6 +222,9 @@
 			dependencies = (
 			);
 			name = "AlgebraMathMage (iOS)";
+			packageProductDependencies = (
+				422A948A28AEE1D000094E6F /* YouTubePlayerKit */,
+			);
 			productName = "AlgebraMathMage (iOS)";
 			productReference = 421FF85F28A9E7C9000AB2FC /* AlgebraMathMage.app */;
 			productType = "com.apple.product-type.application";
@@ -314,6 +319,9 @@
 				Base,
 			);
 			mainGroup = 421FF85228A9E7C6000AB2FC;
+			packageReferences = (
+				422A948928AEE1D000094E6F /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
+			);
 			productRefGroup = 421FF86028A9E7C9000AB2FC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -864,6 +872,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		422A948928AEE1D000094E6F /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SvenTiigi/YouTubePlayerKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		422A948A28AEE1D000094E6F /* YouTubePlayerKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 422A948928AEE1D000094E6F /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */;
+			productName = YouTubePlayerKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 421FF85328A9E7C6000AB2FC /* Project object */;
 }
