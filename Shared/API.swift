@@ -145,5 +145,7 @@ class API {
   static func clearKeychain() {
     let keychain = KeychainSwift()
     keychain.clear()
+    keychain.set("0", forKey: "lastSectionIndex")
+    keychain.set("0", forKey: "lastProblemIndex")
   }
 }
