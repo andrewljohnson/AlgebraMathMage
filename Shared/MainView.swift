@@ -5,6 +5,7 @@
 //  Created by Andrew Johnson on 8/14/22.
 //
 
+import KeychainSwift
 import SwiftUI
 
 struct MainView: View {
@@ -257,6 +258,7 @@ struct MainView: View {
             .transition(.scale)
         } else {
           ZStack(alignment: .leading) {
+           
           ProblemView
             .frame(width: self.showMenu ? geometry.size.width/4*3: geometry.size.width, height: geometry.size.height)
             .zIndex(1)
