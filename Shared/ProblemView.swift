@@ -20,11 +20,11 @@ struct ProblemView: View {
   @Binding var problemIndex:Int;
   @Binding var sectionIndex:Int;
   @Binding var showSectionCompletion:Bool;
-  @Binding var showMenu:Bool;
 
   @State private var showHint = false
   @State private var showToast = false
   @State private var showVideo = false
+  @State var showMenu = false
 
   let youTubePlayer: YouTubePlayer = "https://youtube.com/watch?v=dQw4w9WgXcQ"
   
@@ -64,98 +64,100 @@ struct ProblemView: View {
       let textFormula =  problem.formula
       let textHint = problem.hint
       let buttonTitles:[String] = problem.buttonTitles
-      return AnyView(VStack {
-        HStack {
-          Image(systemName: "star")
-                  .imageScale(.large)
-          Text("\(Strings.sectionTitleString) \(sectionIndex + 1) / \(sections.count)")
-            .padding([.trailing], Style.padding)
-          Text("\(Strings.problemTitleString) \(problemIndex + 1) / \(problems.count)")
-          Spacer()
-          Button(
-            action:
-              {
-                withAnimation { showMenu = !showMenu }
-              }
-          )
-          {
-            Image(systemName: "person")
-                    .foregroundColor(.white)
+        return AnyView(
+          GeometryReader { geometry in
+            ZStack {
+              VStack {
+                HStack {
+                  Image(systemName: "star")
                     .imageScale(.large)
-          }
-        }
-          .padding()
-          .background(Style.mainColor)
-
-        Button(action:
-          withAnimation {
-            {
-              showVideo = true
-            }
-          }
-        )
-        {
-          HStack {
-              Image(systemName: "play")
-              Text("Play Helper Video")
-            }
-          .foregroundColor(Style.mainColor)
-          .frame(maxWidth: .infinity, alignment: .leading)
-          .padding()
-        }
-        Spacer()
-        Text(textPrompt)
-          .padding()
-          .font(.largeTitle)
-          .transition(.scale)
-          .id(textPrompt)
-        Text(textFormula)
-          .padding()
-          .font(.title)
-          .padding([.bottom], Style.paddingBelowPrompt)
-          .transition(.scale)
-          .id(textFormula)
-        HStack {
-          ForEach(Array(buttonTitles.enumerated()), id: \.element) {
-            answerChoice, title in
-            Button(action:
-                    { withAnimation {checkAnswer(problems: problems, answerChoice: answerChoice, correctAnswer: correctAnswer)}})
-              {
-                Text(title)
-                  .fontWeight(.bold)
+                  Text("\(Strings.sectionTitleString) \(sectionIndex + 1) / \(sections.count)")
+                    .padding([.trailing], Style.padding)
+                  Text("\(Strings.problemTitleString) \(problemIndex + 1) / \(problems.count)")
+                  Spacer()
+                  Button(action: { withAnimation { showMenu = !showMenu } })
+                  {
+                    Image(systemName: "person")
+                      .foregroundColor(.white)
+                      .imageScale(.large)
+                  }
+                }
+                  .padding()
+                  .background(Style.mainColor)
+                Button(action: withAnimation {{ showVideo = true }})
+                {
+                  HStack {
+                    Image(systemName: "play")
+                    Text("Play Helper Video")
+                  }
+                    .foregroundColor(Style.mainColor)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                }
+                Spacer()
+                Text(textPrompt)
+                  .padding()
                   .font(.largeTitle)
-                  .foregroundColor(Style.mainColor)
-                  .frame(width:Style.buttonSize * 2, height:Style.buttonSize)
-                  .overlay(
-                    RoundedRectangle(cornerRadius: Style.padding)
-                        .stroke(Color.purple, lineWidth: Style.buttonStrokeWidth)
-                  )
-                  .id(title)
+                  .transition(.scale)
+                  .id(textPrompt)
+                Text(textFormula)
+                  .padding()
+                  .font(.title)
+                  .padding([.bottom], Style.paddingBelowPrompt)
+                  .transition(.scale)
+                  .id(textFormula)
+                HStack {
+                  ForEach(Array(buttonTitles.enumerated()), id: \.element) {
+                    answerChoice, title in
+                    Button(action:
+                          { withAnimation {checkAnswer(problems: problems, answerChoice: answerChoice, correctAnswer: correctAnswer)}}
+                    )
+                    {
+                      Text(title)
+                        .fontWeight(.bold)
+                        .font(.largeTitle)
+                        .foregroundColor(Style.mainColor)
+                        .frame(width:Style.buttonSize * 2, height:Style.buttonSize)
+                        .overlay(
+                          RoundedRectangle(cornerRadius: Style.padding)
+                              .stroke(Color.purple, lineWidth: Style.buttonStrokeWidth)
+                        )
+                        .id(title)
 
-              }
-              .transition(.scale)
-              .padding()
+                    }
+                      .transition(.scale)
+                      .padding()
+                  }
+               }
+               if (showHint) {
+                 Text(textHint)
+               } else {
+                 Text("")
+                   .frame(minHeight: 20)
+               }
+               Spacer()
+            }
+              .frame(width: self.showMenu ? geometry.size.width/4*3: geometry.size.width, height: geometry.size.height)
+              .zIndex(1)
+              .toast(message: "Correct, good job!", isShowing: $showToast, duration: Toast.short)
+          }
+          if self.showMenu {
+            MenuView(showMenu: $showMenu, sectionIndex: $sectionIndex, problemIndex: $problemIndex)
+                .background(.black)
+                .frame(width: geometry.size.width/4, height: geometry.size.height)
+                .offset(x: geometry.size.width/4*3)
+                .transition(.move(edge: .trailing))
+                .zIndex(2)
           }
         }
-        if (showHint) {
-          Text(textHint)
-        } else {
-          Text("")
-            .frame(minHeight: 20)
-        }
-        Spacer()
-      }
-        .toast(message: "Correct, good job!",
-                     isShowing: $showToast,
-                     duration: Toast.short)
       )
     }
     return AnyView(EmptyView())
   }
   
   var body: some View {
+    VStack {
       if (self.showVideo) {
-        VStack {
           Button(action:
             withAnimation {
               {
@@ -164,26 +166,19 @@ struct ProblemView: View {
             }
           )
           {
-            HStack {
-                Image(systemName: "arrowshape.turn.up.backward.fill")
-                Text("Done")
-              }
-            .foregroundColor(Style.mainColor)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding()
+            HStack { Image(systemName: "arrowshape.turn.up.backward.fill"); Text("Done") }
+              .foregroundColor(Style.mainColor)
+              .frame(maxWidth: .infinity, alignment: .leading)
+              .padding()
           }
-
           YouTubePlayerView(self.youTubePlayer)
-            .onAppear { youTubePlayer.configuration = .init(
-              autoPlay: true
-            ) }
-        }
+            .onAppear { youTubePlayer.configuration = .init(autoPlay: true) }
       } else {
         ProblemView
           .zIndex(1)
-          .transition(AnyTransition.scale.animation(.easeInOut(duration: 0.3)))
       }
     }
-}
+  }
 
+}
 

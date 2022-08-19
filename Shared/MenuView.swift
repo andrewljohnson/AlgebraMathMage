@@ -9,13 +9,11 @@ import SwiftUI
 
 struct MenuView: View {
 
-  let owner:MainView
+  @Binding var showMenu:Bool
+  @Binding var sectionIndex:Int
+  @Binding var problemIndex:Int
   @State private var showMenuSection = -1
   @State private var showMenuSectionList = false
-
-  init(owner:MainView) {
-    self.owner = owner
-  }
 
   var MenuView: some View {
       VStack {
@@ -30,21 +28,21 @@ struct MenuView: View {
               Button(action:
                 {
                   withAnimation {
-                    owner.problemIndex = problemNumber
-                    owner.sectionIndex = showMenuSection
-                    owner.showMenu = false
+                    problemIndex = problemNumber
+                    sectionIndex = showMenuSection
+                    showMenu = false
                     showMenuSection = -1
                   }
                 }
               )
                 {
-                  Text(owner.sectionIndex == showMenuSection && problemNumber == owner.problemIndex ? "\(problemNumber) -  \(problem.prompt) (current problem)" : "\(problemNumber) - \(problem.prompt)")
+                  Text(sectionIndex == showMenuSection && problemNumber == problemIndex ? "\(problemNumber) -  \(problem.prompt) (current problem)" : "\(problemNumber) - \(problem.prompt)")
                     .frame(alignment: .leading)
                     .multilineTextAlignment(.leading)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
-                .foregroundColor(owner.sectionIndex == showMenuSection && problemNumber == owner.problemIndex ? .green : .white)
+                .foregroundColor(sectionIndex == showMenuSection && problemNumber == problemIndex ? .green : .white)
             }
           }
         } else if (showMenuSectionList) {
@@ -88,9 +86,9 @@ struct MenuView: View {
             withAnimation {
               {
                 API.clearKeychain()
-                owner.sectionIndex = 0
-                owner.problemIndex = 0
-                owner.showMenu = false
+                sectionIndex = 0
+                problemIndex = 0
+                showMenu = false
               }
             }
           )
