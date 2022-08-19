@@ -1,6 +1,0 @@
-framework module Pods_AlgebraMathMage__macOS_ {
-  umbrella header "Pods-AlgebraMathMage (macOS)-umbrella.h"
-
-  export *
-  module * { export * }
-}
