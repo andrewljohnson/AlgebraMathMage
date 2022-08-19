@@ -13,15 +13,19 @@ struct MainView: View {
   @State var problemIndex = API.getLastQuestion()["problemIndex"] ?? 0
   @State var sectionIndex = API.getLastQuestion()["sectionIndex"] ?? 0
   @State var showSectionCompletion = false
-
+  
+  let animationDuration = 0.3
+  
   var body: some View {
         ZStack(alignment: .leading) {
           if (self.showSectionCompletion) {
             SectionCompletionView(owner:self)
               .transition(.scale)
           } else {
-            ProblemView(problemIndex:$problemIndex, sectionIndex:$sectionIndex, showSectionCompletion:$showSectionCompletion)
-              .transition(AnyTransition.scale.animation(.easeInOut(duration: 0.3)))
+            ProblemView(problemIndex:$problemIndex,
+                        sectionIndex:$sectionIndex,
+                        showSectionCompletion:$showSectionCompletion)
+              .transition(AnyTransition.scale.animation(.easeInOut(duration: animationDuration)))
         }
       }
   }
