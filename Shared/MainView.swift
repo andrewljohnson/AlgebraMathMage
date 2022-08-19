@@ -22,7 +22,7 @@ struct MainView: View {
             SectionCompletionView(owner:self)
               .transition(.scale)
           } else {
-            ProblemView(owner:self)
+            ProblemView(problemIndex:$problemIndex, sectionIndex:$sectionIndex, showSectionCompletion:$showSectionCompletion, showMenu:$showMenu)
             .frame(width: self.showMenu ? geometry.size.width/4*3: geometry.size.width, height: geometry.size.height)
             .zIndex(1)
           if self.showMenu {
@@ -34,9 +34,7 @@ struct MainView: View {
                 .zIndex(2)
           }
         }
-      }
-    }
-    .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.2)))
+      }}
   }
 }
 

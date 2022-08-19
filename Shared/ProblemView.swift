@@ -17,44 +17,48 @@ import YouTubePlayerKit
 
 struct ProblemView: View {
   
+  @Binding var problemIndex:Int;
+  @Binding var sectionIndex:Int;
+  @Binding var showSectionCompletion:Bool;
+  @Binding var showMenu:Bool;
+
   @State private var showHint = false
   @State private var showToast = false
   @State private var showVideo = false
-  var owner:MainView
 
   let youTubePlayer: YouTubePlayer = "https://youtube.com/watch?v=dQw4w9WgXcQ"
   
   func checkAnswer (problems:[Any], answerChoice:Int, correctAnswer:Int) {
     if let sections = API.loadCurriculum() {
-      let section = sections[owner.sectionIndex]
-      let problem = section.problems[owner.problemIndex]
+      let section = sections[sectionIndex]
+      let problem = section.problems[problemIndex]
       API.saveUserAnswer(problemID: problem.id, sectionID: section.id, answerIndex: answerChoice)
       API.printKeychain()
       if (answerChoice == correctAnswer) {
-        owner.problemIndex += 1
+        problemIndex += 1
         showHint = false
       } else {
         showHint = true
       }
-      if (owner.problemIndex >= problems.count) {
-        owner.problemIndex = 0
-        owner.sectionIndex += 1
-        owner.showSectionCompletion = true
-        if (owner.sectionIndex >= sections.count) {
-          owner.sectionIndex = 0
+      if (problemIndex >= problems.count) {
+        problemIndex = 0
+        sectionIndex += 1
+        showSectionCompletion = true
+        if (sectionIndex >= sections.count) {
+          sectionIndex = 0
         }
       } else if (answerChoice == correctAnswer) {
         showToast = true
       }
     }
-    API.saveLastQuestion(sectionIndex: owner.sectionIndex, problemIndex: owner.problemIndex)
+    API.saveLastQuestion(sectionIndex: sectionIndex, problemIndex: problemIndex)
   }
   
   var ProblemView: some View {
     if let sections = API.loadCurriculum() {
-      let section = sections[owner.sectionIndex]
+      let section = sections[sectionIndex]
       let problems = section.problems
-      let problem = problems[owner.problemIndex]
+      let problem = problems[problemIndex]
       let correctAnswer = problem.answer
       let textPrompt = problem.prompt
       let textFormula =  problem.formula
@@ -64,14 +68,14 @@ struct ProblemView: View {
         HStack {
           Image(systemName: "star")
                   .imageScale(.large)
-          Text("\(Strings.sectionTitleString) \(owner.sectionIndex + 1) / \(sections.count)")
+          Text("\(Strings.sectionTitleString) \(sectionIndex + 1) / \(sections.count)")
             .padding([.trailing], Style.padding)
-          Text("\(Strings.problemTitleString) \(owner.problemIndex + 1) / \(problems.count)")
+          Text("\(Strings.problemTitleString) \(problemIndex + 1) / \(problems.count)")
           Spacer()
           Button(
             action:
               {
-                withAnimation { owner.showMenu = !owner.showMenu }
+                withAnimation { showMenu = !showMenu }
               }
           )
           {
@@ -82,7 +86,7 @@ struct ProblemView: View {
         }
           .padding()
           .background(Style.mainColor)
-        
+
         Button(action:
           withAnimation {
             {
@@ -150,7 +154,6 @@ struct ProblemView: View {
   }
   
   var body: some View {
-    GeometryReader { geometry in
       if (self.showVideo) {
         VStack {
           Button(action:
@@ -178,8 +181,9 @@ struct ProblemView: View {
       } else {
         ProblemView
           .zIndex(1)
+          .transition(AnyTransition.scale.animation(.easeInOut(duration: 0.3)))
       }
     }
-    .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.2)))
-  }
 }
+
+
