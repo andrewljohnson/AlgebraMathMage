@@ -18,7 +18,6 @@ struct MenuView: View {
   }
 
   var MenuView: some View {
-    return AnyView(
       VStack {
         if (showMenuSection > -1) {
           if let sections = API.loadCurriculum() {
@@ -110,7 +109,6 @@ struct MenuView: View {
         .foregroundColor(.white)
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
-    )
   }
 
   var body: some View {

@@ -34,6 +34,8 @@
 		4294A2A228AD669E008BD756 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4294A2A128AD669E008BD756 /* Toast.swift */; };
 		4294A2A328AD669E008BD756 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4294A2A128AD669E008BD756 /* Toast.swift */; };
 		42E4800D28AFF52E00D3BE1A /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 42E4800C28AFF52E00D3BE1A /* KeychainSwift */; };
+		42E4800F28AFFE8C00D3BE1A /* ProblemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4800E28AFFE8C00D3BE1A /* ProblemView.swift */; };
+		42E4801028AFFE8C00D3BE1A /* ProblemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4800E28AFFE8C00D3BE1A /* ProblemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,7 @@
 		4294A29528AC265B008BD756 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		4294A2A128AD669E008BD756 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		4294A2A728AED707008BD756 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		42E4800E28AFFE8C00D3BE1A /* ProblemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemView.swift; sourceTree = "<group>"; };
 		A4800FB01CC139A6FAA3297F /* Pods_AlgebraMathMage__iOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlgebraMathMage__iOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD0B1EA5D2F388B7486EA25F /* Pods_AlgebraMathMage__macOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlgebraMathMage__macOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -149,6 +152,7 @@
 				421FF85A28A9E7C9000AB2FC /* Assets.xcassets */,
 				422A948C28AEE9AE00094E6F /* SectionCompletionView.swift */,
 				422A948F28AEEAF200094E6F /* MenuView.swift */,
+				42E4800E28AFFE8C00D3BE1A /* ProblemView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -365,6 +369,7 @@
 				422A948D28AEE9AE00094E6F /* SectionCompletionView.swift in Sources */,
 				4294A29628AC265B008BD756 /* Strings.swift in Sources */,
 				421FF88028A9E7C9000AB2FC /* AlgebraMathMageApp.swift in Sources */,
+				42E4800F28AFFE8C00D3BE1A /* ProblemView.swift in Sources */,
 				4294A29328AC2576008BD756 /* Style.swift in Sources */,
 				4294A2A228AD669E008BD756 /* Toast.swift in Sources */,
 			);
@@ -380,6 +385,7 @@
 				422A948E28AEE9AE00094E6F /* SectionCompletionView.swift in Sources */,
 				4294A29728AC265B008BD756 /* Strings.swift in Sources */,
 				421FF88128A9E7C9000AB2FC /* AlgebraMathMageApp.swift in Sources */,
+				42E4801028AFFE8C00D3BE1A /* ProblemView.swift in Sources */,
 				4294A29428AC2576008BD756 /* Style.swift in Sources */,
 				4294A2A328AD669E008BD756 /* Toast.swift in Sources */,
 			);
