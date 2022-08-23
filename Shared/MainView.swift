@@ -10,8 +10,8 @@ import SwiftUI
 
 struct MainView: View {
   
-  @State var problemIndex = API.getLastQuestion()["problemIndex"] ?? 0
-  @State var sectionIndex = API.getLastQuestion()["sectionIndex"] ?? 0
+  @State var problemIndex = API.getLastQuestion()[APIKeys.sectionIndex] ?? 0
+  @State var sectionIndex = API.getLastQuestion()[APIKeys.problemIndex] ?? 0
   @State var showSectionCompletion = false
   
   let animationDuration = 0.3

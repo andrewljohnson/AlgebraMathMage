@@ -26,6 +26,7 @@ struct ProblemView: View {
   @State private var showVideo = false
   @State var showMenu = false
 
+  // rick roll
   let youTubePlayer: YouTubePlayer = "https://youtube.com/watch?v=dQw4w9WgXcQ"
   
   func checkAnswer (problems:[Any], answerChoice:Int, correctAnswer:Int) {
@@ -71,9 +72,9 @@ struct ProblemView: View {
                 HStack {
                   Image(systemName: "star")
                     .imageScale(.large)
-                  Text("\(Strings.sectionTitleString) \(sectionIndex + 1) / \(sections.count)")
+                  Text("\(Strings.section.capitalized) \(sectionIndex + 1) / \(sections.count)")
                     .padding([.trailing], Style.padding)
-                  Text("\(Strings.problemTitleString) \(problemIndex + 1) / \(problems.count)")
+                  Text("\(Strings.problem.capitalized) \(problemIndex + 1) / \(problems.count)")
                   Spacer()
                   Button(action: { withAnimation { showMenu = !showMenu } })
                   {
@@ -88,7 +89,7 @@ struct ProblemView: View {
                 {
                   HStack {
                     Image(systemName: "play")
-                    Text("Play Helper Video")
+                    Text(Strings.playHelperVideo.capitalized)
                   }
                     .foregroundColor(Style.mainColor)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -139,7 +140,7 @@ struct ProblemView: View {
             }
               .frame(width: self.showMenu ? geometry.size.width/4*3: geometry.size.width, height: geometry.size.height)
               .zIndex(1)
-              .toast(message: "Correct, good job!", isShowing: $showToast, duration: Toast.short)
+              .toast(message: Strings.correctGoodJob, isShowing: $showToast, duration: Toast.short)
           }
           if self.showMenu {
             MenuView(showMenu: $showMenu, sectionIndex: $sectionIndex, problemIndex: $problemIndex)

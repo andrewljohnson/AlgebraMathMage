@@ -9,6 +9,15 @@ import Foundation
 import KeychainSwift
 import Security
 
+struct APIKeys {
+  static let lastSectionIndex = "lastSectionIndex"
+  static let lastProblemIndex = "lastProblemIndex"
+  static let sectionIndex = "sectionIndex"
+  static let problemIndex = "problemIndex"
+  static let username = "username"
+  static let userAnswersLookupSuffix = "_answers"
+}
+
 struct Problem: Decodable, Hashable {
   enum Category: Decodable {
       case swift, combine, debugging, xcode
@@ -73,18 +82,19 @@ class API {
 
   static func saveUserAnswer(problemID:Int, sectionID: Int, answerIndex:Int) {
     let keychain = KeychainSwift()
-    if keychain.get("username") == nil {
+    if keychain.get(APIKeys.username) == nil {
       // todo: set a random username from server
-      keychain.set("Cat Mellon Runner", forKey: "username")
+      keychain.set(Strings.initialUsername, forKey: APIKeys.username)
       print("saved initial username")
     }
-    if let username = keychain.get("username") {
-      if keychain.get("\(username)_answers") == nil {
+    if let username = keychain.get(APIKeys.username) {
+      let answersLookupKey = "\(username)\(APIKeys.userAnswersLookupSuffix)"
+      if keychain.get(answersLookupKey) == nil {
         // todo is this force unwrap bad?
-        keychain.set(API.answerArrayToData(answerArray:[])!, forKey: "\(username)_answers")
+        keychain.set(API.answerArrayToData(answerArray:[])!, forKey: answersLookupKey)
       }
 
-      if let dataAnswers = keychain.getData("\(username)_answers") {
+      if let dataAnswers = keychain.getData(answersLookupKey) {
         if var answers = API.dataToAnswerArray(data:dataAnswers) {
           var found = false
           let newAnswers: [Answer] = answers.map { answer in
@@ -92,7 +102,6 @@ class API {
               var answerIndices = answer.answerIndices
               answerIndices.append(answerIndex)
               found = true
-              print ("found question, adding an answer")
               return Answer(sectionID: answer.sectionID, problemID: answer.problemID, answerIndices: answerIndices)
             }
             return answer
@@ -100,13 +109,12 @@ class API {
           if (!found) {
             let newAnswer:Answer = Answer(sectionID: sectionID, problemID: problemID, answerIndices: [answerIndex])
             answers.append(newAnswer)
-            print ("saved an unanswered question")
             if let data = API.answerArrayToData(answerArray:answers) {
-              keychain.set(data, forKey: "\(username)_answers")
+              keychain.set(data, forKey: answersLookupKey)
             }
           } else {
             if let data = API.answerArrayToData(answerArray:newAnswers) {
-              keychain.set(data, forKey: "\(username)_answers")
+              keychain.set(data, forKey: answersLookupKey)
             }
           }
         }
@@ -116,22 +124,22 @@ class API {
   
   static func saveLastQuestion(sectionIndex: Int, problemIndex: Int) {
     let keychain = KeychainSwift()
-    keychain.set("\(sectionIndex)", forKey: "lastSectionIndex")
-    keychain.set("\(problemIndex)", forKey: "lastProblemIndex")
+    keychain.set("\(sectionIndex)", forKey: APIKeys.lastSectionIndex)
+    keychain.set("\(problemIndex)", forKey: APIKeys.lastProblemIndex)
   }
 
   static func getLastQuestion() -> [String:Int] {
     let keychain = KeychainSwift()
-    if let sectionIndex = keychain.get("lastSectionIndex"), let problemIndex = keychain.get("lastProblemIndex") {
-      return ["sectionIndex": Int(sectionIndex) ?? 0, "problemIndex": Int(problemIndex) ?? 0]
+    if let sectionIndex = keychain.get(APIKeys.lastSectionIndex), let problemIndex = keychain.get(APIKeys.lastProblemIndex) {
+      return [APIKeys.sectionIndex: Int(sectionIndex) ?? 0, APIKeys.problemIndex: Int(problemIndex) ?? 0]
     }
-    return ["sectionIndex": 0, "problemIndex": 0]
+    return [APIKeys.sectionIndex: 0, APIKeys.problemIndex: 0]
   }
   
   static func printKeychain() {
     let keychain = KeychainSwift()
     for keykey in keychain.allKeys {
-      if keykey == "username" {
+      if keykey == APIKeys.username {
         print("\(keykey): \(keychain.get(keykey)!)")
       } else {
         if let data = keychain.getData(keykey), let answers = API.dataToAnswerArray(data: data) {
@@ -146,7 +154,7 @@ class API {
   static func clearKeychain() {
     let keychain = KeychainSwift()
     keychain.clear()
-    keychain.set("0", forKey: "lastSectionIndex")
-    keychain.set("0", forKey: "lastProblemIndex")
+    keychain.set("0", forKey: APIKeys.lastSectionIndex)
+    keychain.set("0", forKey: APIKeys.lastProblemIndex)
   }
 }

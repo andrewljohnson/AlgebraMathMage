@@ -145,14 +145,14 @@
 				421FF85828A9E7C6000AB2FC /* AlgebraMathMageApp.swift */,
 				4294A28E28AC1D6C008BD756 /* API.swift */,
 				421FF85928A9E7C6000AB2FC /* MainView.swift */,
+				422A948F28AEEAF200094E6F /* MenuView.swift */,
 				4294A29228AC2576008BD756 /* Style.swift */,
+				42E4800E28AFFE8C00D3BE1A /* ProblemView.swift */,
+				422A948C28AEE9AE00094E6F /* SectionCompletionView.swift */,
 				4294A29528AC265B008BD756 /* Strings.swift */,
 				4294A2A128AD669E008BD756 /* Toast.swift */,
 				4294A28C28AC1C1C008BD756 /* curriculum.json */,
 				421FF85A28A9E7C9000AB2FC /* Assets.xcassets */,
-				422A948C28AEE9AE00094E6F /* SectionCompletionView.swift */,
-				422A948F28AEEAF200094E6F /* MenuView.swift */,
-				42E4800E28AFFE8C00D3BE1A /* ProblemView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";

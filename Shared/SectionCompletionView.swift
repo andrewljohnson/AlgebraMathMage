@@ -18,7 +18,7 @@ struct SectionCompletionView: View {
   var SectionCompletionView: some View {
     VStack {
       Spacer()
-      Text("Your completed a section! Great job!")
+      Text(Strings.sectionCompleteCongratulations)
         .foregroundColor(Style.mainColor)
         .frame(maxWidth: .infinity)
         .font(.largeTitle)
@@ -27,7 +27,7 @@ struct SectionCompletionView: View {
         owner.showSectionCompletion = false
         }})
       {
-        Text("Continue to Next Section")
+        Text(Strings.continueToNextSection)
           .fontWeight(.bold)
           .font(.largeTitle)
           .background(.white)

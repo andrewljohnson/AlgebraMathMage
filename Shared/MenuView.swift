@@ -20,7 +20,7 @@ struct MenuView: View {
         if (showMenuSection > -1) {
           if let sections = API.loadCurriculum() {
             let section = sections[showMenuSection]
-            Text("Section \(showMenuSection)")
+            Text("\(Strings.section.capitalized) \(showMenuSection)")
               .frame(maxWidth: .infinity, alignment: .leading)
               .font(.title)
             ForEach(Array(section.problems.enumerated()), id: \.element) {
@@ -36,7 +36,7 @@ struct MenuView: View {
                 }
               )
                 {
-                  Text(sectionIndex == showMenuSection && problemNumber == problemIndex ? "\(problemNumber) -  \(problem.prompt) (current problem)" : "\(problemNumber) - \(problem.prompt)")
+                  Text(sectionIndex == showMenuSection && problemNumber == problemIndex ? "\(problemNumber) -  \(problem.prompt) (\(Strings.currentProblem.capitalized)" : "\(problemNumber) - \(problem.prompt)")
                     .frame(alignment: .leading)
                     .multilineTextAlignment(.leading)
                 }
@@ -75,7 +75,7 @@ struct MenuView: View {
           {
             HStack {
                 Image(systemName: "list.number")
-                Text("Problems")
+              Text(Strings.problems.capitalized)
               }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
@@ -95,7 +95,7 @@ struct MenuView: View {
             {
               HStack {
                   Image(systemName: "minus.circle.fill")
-                  Text("Clear Data")
+                Text(Strings.clearData.capitalized)
                 }
               .frame(maxWidth: .infinity, alignment: .leading)
               .padding()
