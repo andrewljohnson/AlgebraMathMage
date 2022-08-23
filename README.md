@@ -3,33 +3,16 @@
 This is an app for iPad to teach kids math, egged on by lots of little videos.
 
 ## Todo 
- *
+ * Randomize answer order
 
 ### Todo Later/Maybe
 * Show chapter finish screen (when we have chapters))
-* Randomize answer order
-* Don't use both Swift packages and cocoapods?
 * Bugs
-  * make reset data button animate
-  * make transition back from section complete view into a scale transition 
   * limit usage to iPads in build
-
 
 ## Setup
 
-### Summary
-
-Install cocoapods, use that to install the pods, then run the app in XCode. Use `AlgebraMathMage.xcworkspace` to open the project in XCode since we're using cocoapods.
-
-### Install cocoapods
-```
-brew install cocoapods
-```
-
-### Install pods
-```
-pod install
-```
+Run the app in XCode.
 
 ## Notes
 
