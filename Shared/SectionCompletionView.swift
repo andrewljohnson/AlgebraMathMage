@@ -9,13 +9,9 @@ import SwiftUI
 
 struct SectionCompletionView: View {
 
-  let owner:MainView
-  
-  init(owner:MainView) {
-    self.owner = owner
-  }
+  @Binding var showSectionCompletion:Bool;
 
-  var SectionCompletionView: some View {
+  var body: some View {
     VStack {
       Spacer()
       Text(Strings.sectionCompleteCongratulations)
@@ -24,7 +20,7 @@ struct SectionCompletionView: View {
         .font(.largeTitle)
       Button(action:
         withAnimation {{
-        owner.showSectionCompletion = false
+        showSectionCompletion = false
         }})
       {
         Text(Strings.continueToNextSection)
@@ -41,9 +37,5 @@ struct SectionCompletionView: View {
       .padding()
       Spacer()
     }
-  }
-
-  var body: some View {
-    SectionCompletionView
   }
 }

@@ -13,6 +13,7 @@ struct Strings {
   static let continueToNextSection = "Continue to Next Section"
   static let correctGoodJob = "Correct, good job!"
   static let currentProblem = "current problem"
+  static let done = "done"
   static let initialUsername = "Cat Mellon Runner"
   static let playHelperVideo = "play helper video"
   static let problem = "problem"

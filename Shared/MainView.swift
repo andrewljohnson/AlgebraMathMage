@@ -19,12 +19,12 @@ struct MainView: View {
   var body: some View {
         ZStack(alignment: .leading) {
           if (self.showSectionCompletion) {
-            SectionCompletionView(owner:self)
+            SectionCompletionView(showSectionCompletion: $showSectionCompletion)
               .transition(.scale)
           } else {
-            ProblemView(problemIndex:$problemIndex,
-                        sectionIndex:$sectionIndex,
-                        showSectionCompletion:$showSectionCompletion)
+            ProblemNavigatorView(problemIndex:$problemIndex,
+                                 sectionIndex:$sectionIndex,
+                                 showSectionCompletion:$showSectionCompletion)
               .transition(AnyTransition.scale.animation(.easeInOut(duration: animationDuration)))
         }
       }
