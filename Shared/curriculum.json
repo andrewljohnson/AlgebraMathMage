@@ -1,7 +1,31 @@
 [
   {
-    "sectionTitle": "Variables",
+    "sectionTitle": "Multiplication Facts",
     "id": 0,
+    "problems": [
+      {
+        "id": 5,
+        "prompt": "",
+        "formula": "2 x 1 =",
+        "hint": "Any number times 1 is it self.",
+        "answer": 2,
+        "buttonTitles": null,
+        "type": "number"
+      },
+      {
+        "id": 6,
+        "prompt": "",
+        "formula": "2 x 2 =",
+        "hint": "This is the same as 2 + 2, since 2 x 2 means something like 2 piles of 2 cookies.",
+        "answer": 4,
+        "buttonTitles": null,
+        "type": "number"
+      }
+    ]
+  },
+  {
+    "sectionTitle": "Variables",
+    "id": 1,
     "problems": [
       {
         "id": 0,
@@ -9,7 +33,8 @@
         "formula": "3 - X = 1",
         "hint": "This is the same as 3 - 1 = X. So what is X?",
         "buttonTitles": ["1", "2", "3"],
-        "answer": 1
+        "answerIndex": 1,
+        "type": "multiple_choice"
       },
       {
         "id": 1,
@@ -17,7 +42,8 @@
         "formula": "1 + X = 2",
         "hint": "This is the same as 2 - 1 = X. So what is X?",
         "buttonTitles": ["1", "2", "3"],
-        "answer": 0
+        "answerIndex": 0,
+        "type": "multiple_choice"
       },
       {
         "id": 2,
@@ -25,13 +51,14 @@
         "formula": "1 + X = 1",
         "hint": "Variables are symbols in math that represent an amount. X is a variable.",
         "buttonTitles": ["a variable", "a florp", "a dorp"],
-        "answer": 0
+        "answerIndex": 0,
+        "type": "multiple_choice"
       }
     ]
   },
   {
     "sectionTitle": "More Variables",
-    "id": 1,
+    "id": 2,
     "problems": [
       {
         "id": 3,
@@ -39,7 +66,8 @@
         "formula": "9 - X = 1",
         "hint": "This is the same as 9 - 1 = X. So what is X?",
         "buttonTitles": ["1", "8", "17"],
-        "answer": 1
+        "answerIndex": 1,
+        "type": "multiple_choice"
       },
       {
         "id": 4,
@@ -47,7 +75,8 @@
         "formula": "17 - X = 11",
         "hint": "This is the same as 17 - 11 = X. So what is X?",
         "buttonTitles": ["1", "2", "6"],
-        "answer": 2
+        "answerIndex": 2,
+        "type": "multiple_choice"
       }
     ]
   }

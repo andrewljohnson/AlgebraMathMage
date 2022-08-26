@@ -12,18 +12,18 @@ struct ProblemView: View {
   // tightly coupled with parent so it can call checkAnswer
   // otherwise I'd just bind some variables
   // todo: ?
-  let problemNavigatorView:ProblemNavigatorView
+  let problemNavigator:ProblemNavigatorView
+  @State var answerString = ""
   
   var body: some View {
     if let sections = API.loadCurriculum() {
-      let section = sections[problemNavigatorView.sectionIndex]
+      let section = sections[problemNavigator.sectionIndex]
       let problems = section.problems
-      let problem = problems[problemNavigatorView.problemIndex]
-      let correctAnswer = problem.answer
+      let problem = problems[problemNavigator.problemIndex]
       let textPrompt = problem.prompt
       let textFormula =  problem.formula
       let textHint = problem.hint
-      let buttonTitles:[String] = problem.buttonTitles
+      let buttonTitles:[String] = problem.buttonTitles ?? []
       VStack {
         Spacer()
         Text(textPrompt)
@@ -31,45 +31,49 @@ struct ProblemView: View {
           .font(.largeTitle)
           .transition(.scale)
           .id(textPrompt)
-        Text(textFormula)
-          .padding()
-          .font(.title)
-          .padding([.bottom], Style.paddingBelowPrompt)
-          .transition(.scale)
-          .id(textFormula)
-        HStack {
-          ForEach(Array(buttonTitles.enumerated()), id: \.element) {
-            answerChoice, title in
-            Button(action:
-                    { withAnimation { problemNavigatorView.checkAnswer(problems: problems, answerChoice: answerChoice, correctAnswer: correctAnswer) }}
-            )
-            {
-              Text(title)
-                .fontWeight(.bold)
-                .font(.largeTitle)
-                .foregroundColor(Style.mainColor)
-                .frame(width:Style.buttonSize * 2, height:Style.buttonSize)
-                .overlay(
-                  RoundedRectangle(cornerRadius: Style.padding)
-                      .stroke(Color.purple, lineWidth: Style.buttonStrokeWidth)
-                )
-                .id(title)
-
-            }
-              .transition(.scale)
+        if (problem.type == APIKeys.multipleChoice) {
+          Text(textFormula)
+            .padding()
+            .font(.title)
+            .padding([.bottom], Style.paddingBelowPrompt)
+            .transition(.scale)
+            .id(textFormula)
+        } else {
+          HStack {
+            Text(textFormula)
               .padding()
-            }
-         }
-          if (problemNavigatorView.showHint) {
-           Text(textHint)
-         } else {
-           Text("")
-             .frame(minHeight: 20)
-         }
-         Spacer()
+              .font(.title)
+              .transition(.scale)
+              .id(textFormula)
+            Text(answerString)
+              .fontWeight(.bold)
+              .padding()
+              .font(.title)
+              .transition(.scale)
+              .overlay(
+                Rectangle()
+                  .stroke(Style.colorMain, lineWidth: Style.inputStrokeWidth)
+              )
+              .id("number_answer")
+          }
+          .padding([.bottom], Style.paddingBelowPrompt)
+
+        }
+        HStack {
+          if (problem.type == APIKeys.multipleChoice) {
+            KeyboardMultipleChoice(buttonTitles:buttonTitles, problemNavigator:problemNavigator)
+          } else {
+            KeyboardIntegers(answerString: $answerString, problemNavigator: problemNavigator)
+          }
+        }
+        if (problemNavigator.showHint) {
+          HStack { Text("\(Strings.hint.capitalized): "); Text(textHint) }
+        } else {
+          Text("")
+            .frame(minHeight: 20)
+        }
+        Spacer()
       }
     }
   }
-
 }
-

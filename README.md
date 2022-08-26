@@ -3,12 +3,13 @@
 This is an app for iPad to teach kids math, egged on by lots of little videos.
 
 ## Todo 
- * Randomize answer order
-
+ * various problem forms for multiplication
+ 
 ### Todo Later/Maybe
-* Show chapter finish screen (when we have chapters))
-* Bugs
-  * limit usage to iPads in build
+ * Randomize answer order
+ * Show chapter finish screen (when we have chapters))
+ * Bugs
+   * limit usage to iPads in build
 
 ## Setup
 Run the app in XCode.

@@ -38,6 +38,10 @@
 		42E4801028AFFE8C00D3BE1A /* ProblemNavigatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4800E28AFFE8C00D3BE1A /* ProblemNavigatorView.swift */; };
 		42E4801228B54F9600D3BE1A /* ProblemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4801128B54F9600D3BE1A /* ProblemView.swift */; };
 		42E4801328B54F9600D3BE1A /* ProblemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4801128B54F9600D3BE1A /* ProblemView.swift */; };
+		42E4801528B960D200D3BE1A /* KeyboardIntegers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4801428B960D200D3BE1A /* KeyboardIntegers.swift */; };
+		42E4801628B960D200D3BE1A /* KeyboardIntegers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4801428B960D200D3BE1A /* KeyboardIntegers.swift */; };
+		42E4801828B965B300D3BE1A /* KeyboardMultipleChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4801728B965B300D3BE1A /* KeyboardMultipleChoice.swift */; };
+		42E4801928B965B300D3BE1A /* KeyboardMultipleChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4801728B965B300D3BE1A /* KeyboardMultipleChoice.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +85,8 @@
 		4294A2A728AED707008BD756 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		42E4800E28AFFE8C00D3BE1A /* ProblemNavigatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemNavigatorView.swift; sourceTree = "<group>"; };
 		42E4801128B54F9600D3BE1A /* ProblemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemView.swift; sourceTree = "<group>"; };
+		42E4801428B960D200D3BE1A /* KeyboardIntegers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardIntegers.swift; sourceTree = "<group>"; };
+		42E4801728B965B300D3BE1A /* KeyboardMultipleChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardMultipleChoice.swift; sourceTree = "<group>"; };
 		A4800FB01CC139A6FAA3297F /* Pods_AlgebraMathMage__iOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlgebraMathMage__iOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD0B1EA5D2F388B7486EA25F /* Pods_AlgebraMathMage__macOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlgebraMathMage__macOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -149,11 +155,13 @@
 				4294A28E28AC1D6C008BD756 /* API.swift */,
 				421FF85928A9E7C6000AB2FC /* MainView.swift */,
 				422A948F28AEEAF200094E6F /* MenuView.swift */,
-				4294A29228AC2576008BD756 /* Style.swift */,
+				42E4801428B960D200D3BE1A /* KeyboardIntegers.swift */,
+				42E4801728B965B300D3BE1A /* KeyboardMultipleChoice.swift */,
 				42E4800E28AFFE8C00D3BE1A /* ProblemNavigatorView.swift */,
 				42E4801128B54F9600D3BE1A /* ProblemView.swift */,
 				422A948C28AEE9AE00094E6F /* SectionCompletionView.swift */,
 				4294A29528AC265B008BD756 /* Strings.swift */,
+				4294A29228AC2576008BD756 /* Style.swift */,
 				4294A2A128AD669E008BD756 /* Toast.swift */,
 				4294A28C28AC1C1C008BD756 /* curriculum.json */,
 				421FF85A28A9E7C9000AB2FC /* Assets.xcassets */,
@@ -367,8 +375,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42E4801528B960D200D3BE1A /* KeyboardIntegers.swift in Sources */,
 				421FF88228A9E7C9000AB2FC /* MainView.swift in Sources */,
 				422A949028AEEAF200094E6F /* MenuView.swift in Sources */,
+				42E4801828B965B300D3BE1A /* KeyboardMultipleChoice.swift in Sources */,
 				4294A28F28AC1D6C008BD756 /* API.swift in Sources */,
 				422A948D28AEE9AE00094E6F /* SectionCompletionView.swift in Sources */,
 				42E4801228B54F9600D3BE1A /* ProblemView.swift in Sources */,
@@ -384,8 +394,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42E4801628B960D200D3BE1A /* KeyboardIntegers.swift in Sources */,
 				421FF88328A9E7C9000AB2FC /* MainView.swift in Sources */,
 				422A949128AEEAF200094E6F /* MenuView.swift in Sources */,
+				42E4801928B965B300D3BE1A /* KeyboardMultipleChoice.swift in Sources */,
 				4294A29028AC1F17008BD756 /* API.swift in Sources */,
 				422A948E28AEE9AE00094E6F /* SectionCompletionView.swift in Sources */,
 				42E4801328B54F9600D3BE1A /* ProblemView.swift in Sources */,

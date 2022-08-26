@@ -10,6 +10,7 @@ import KeychainSwift
 import Security
 
 struct APIKeys {
+  static let multipleChoice = "multiple_choice"
   static let lastSectionIndex = "lastSectionIndex"
   static let lastProblemIndex = "lastProblemIndex"
   static let sectionIndex = "sectionIndex"
@@ -26,8 +27,10 @@ struct Problem: Decodable, Hashable {
   let prompt: String
   let formula: String
   let hint: String
-  let buttonTitles: [String]
-  let answer: Int
+  let buttonTitles: [String]?
+  let answer: Int?
+  let answerIndex: Int?
+  let type: String
 }
 
 struct Section: Decodable, Hashable {
@@ -121,7 +124,7 @@ class API {
       }
     }
   }
-  
+
   static func saveLastQuestion(sectionIndex: Int, problemIndex: Int) {
     let keychain = KeychainSwift()
     keychain.set("\(sectionIndex)", forKey: APIKeys.lastSectionIndex)

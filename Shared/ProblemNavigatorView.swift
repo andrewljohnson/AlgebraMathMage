@@ -20,13 +20,15 @@ struct ProblemNavigatorView: View {
   // rick roll
   let youTubePlayer: YouTubePlayer = "https://youtube.com/watch?v=dQw4w9WgXcQ"
   
-  func checkAnswer (problems:[Any], answerChoice:Int, correctAnswer:Int) {
+  func checkAnswer (answerIndex:Int) {
     if let sections = API.loadCurriculum() {
       let section = sections[sectionIndex]
-      let problem = section.problems[problemIndex]
-      API.saveUserAnswer(problemID: problem.id, sectionID: section.id, answerIndex: answerChoice)
+      let problems = section.problems
+      let problem = problems[problemIndex]
+      let correctAnswer = problem.answerIndex
+      API.saveUserAnswer(problemID: problem.id, sectionID: section.id, answerIndex: answerIndex)
       API.printKeychain()
-      if (answerChoice == correctAnswer) {
+      if (answerIndex == correctAnswer) {
         problemIndex += 1
         showHint = false
       } else {
@@ -39,12 +41,45 @@ struct ProblemNavigatorView: View {
         if (sectionIndex >= sections.count) {
           sectionIndex = 0
         }
-      } else if (answerChoice == correctAnswer) {
+      } else if (answerIndex == correctAnswer) {
         showToast = true
       }
     }
     API.saveLastQuestion(sectionIndex: sectionIndex, problemIndex: problemIndex)
   }
+  
+  func checkNumberAnswer (answer:Int) -> Bool {
+    if let sections = API.loadCurriculum() {
+      let section = sections[sectionIndex]
+      let problems = section.problems
+      let correctAnswer = problems[problemIndex].answer
+
+      // todo: we don't save user answers because there is no submit button,
+      //       it just submits when the answer is right.
+      //       Maybe add a submit button, but that is more taps for the user.
+      if (answer == correctAnswer) {
+        problemIndex += 1
+        showHint = false
+      } else {
+        showHint = true
+      }
+      if (problemIndex >= problems.count) {
+        problemIndex = 0
+        sectionIndex += 1
+        showSectionCompletion = true
+        if (sectionIndex >= sections.count) {
+          sectionIndex = 0
+        }
+      } else if (answer == correctAnswer) {
+        showToast = true
+      }
+      API.saveLastQuestion(sectionIndex: sectionIndex, problemIndex: problemIndex)
+      return answer == correctAnswer
+    }
+    // should never get here
+    return false
+  }
+
   
   var body: some View {
     VStack {
@@ -52,7 +87,7 @@ struct ProblemNavigatorView: View {
           Button(action: withAnimation {{ showVideo = false }})
           {
             HStack { Image(systemName: "arrowshape.turn.up.backward.fill"); Text(Strings.done.capitalized) }
-              .foregroundColor(Style.mainColor)
+              .foregroundColor(Style.colorMain)
               .frame(maxWidth: .infinity, alignment: .leading)
               .padding()
           }
@@ -80,18 +115,18 @@ struct ProblemNavigatorView: View {
                       }
                     }
                       .padding()
-                      .background(Style.mainColor)
+                      .background(Style.colorMain)
                     Button(action: withAnimation {{ showVideo = true }})
                     {
                       HStack {
                         Image(systemName: "play")
                         Text(Strings.playHelperVideo.capitalized)
                       }
-                        .foregroundColor(Style.mainColor)
+                        .foregroundColor(Style.colorMain)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
                     }
-                    ProblemView(problemNavigatorView: self)
+                    ProblemView(problemNavigator: self)
                 }
                   .frame(width: self.showMenu ? geometry.size.width/4*3: geometry.size.width, height: geometry.size.height)
                   .toast(message: Strings.correctGoodJob, isShowing: $showToast, duration: Toast.short)

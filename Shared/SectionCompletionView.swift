@@ -15,7 +15,7 @@ struct SectionCompletionView: View {
     VStack {
       Spacer()
       Text(Strings.sectionCompleteCongratulations)
-        .foregroundColor(Style.mainColor)
+        .foregroundColor(Style.colorMain)
         .frame(maxWidth: .infinity)
         .font(.largeTitle)
       Button(action:
@@ -27,11 +27,11 @@ struct SectionCompletionView: View {
           .fontWeight(.bold)
           .font(.largeTitle)
           .background(.white)
-          .foregroundColor(Style.mainColor)
+          .foregroundColor(Style.colorMain)
           .frame(width:Style.buttonSize * 5, height:Style.buttonSize)
           .overlay(
             RoundedRectangle(cornerRadius: Style.padding)
-              .stroke(Style.mainColor, lineWidth: Style.buttonStrokeWidth)
+              .stroke(Style.colorMain, lineWidth: Style.buttonStrokeWidth)
           )
       }
       .padding()
