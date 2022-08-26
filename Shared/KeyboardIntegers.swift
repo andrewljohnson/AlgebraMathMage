@@ -11,6 +11,7 @@ struct KeyboardIntegers: View {
   
   @Binding var answerString:String
   let problemNavigator:ProblemNavigatorView
+  @State var correctAnswerSubmitted = false
   
   func buttonRow(labels:[Int]) -> some View {
     HStack {
@@ -59,27 +60,53 @@ struct KeyboardIntegers: View {
         }
         .disabled(answerString.count == 0)
         Spacer()
-        Button(action:
-                { withAnimation {
-                  let correct = problemNavigator.checkNumberAnswer(answer: Int(answerString) ?? Int(UInt8.min))
-                  if (correct) {
+        if (correctAnswerSubmitted) {
+          Button(action:
+                  { withAnimation {
                     answerString = ""
-                  }
-                }}
-        )
-        {
-          Text(Strings.submit.capitalized)
-            .fontWeight(.bold)
-            .font(.largeTitle)
-            .foregroundColor(answerString.count == 0 ? Style.colorDisabled : Style.colorSubmit)
-            .frame(width:Style.buttonSize * 2, height:Style.buttonSize)
-            .overlay(
-              RoundedRectangle(cornerRadius: Style.padding)
-                .stroke(answerString.count == 0 ? Style.colorDisabled : Style.colorSubmit, lineWidth: Style.buttonStrokeWidth)
-            )
-            .id("submit")
+                    correctAnswerSubmitted = false
+                    problemNavigator.gotoNextProblem()
+                  }}
+          )
+          {
+            Text(Strings.continueWord.capitalized)
+              .fontWeight(.bold)
+              .font(.largeTitle)
+              .foregroundColor(answerString.count == 0 ? Style.colorDisabled : Style.colorContinue)
+              .frame(width:Style.buttonSize * 2, height:Style.buttonSize)
+              .overlay(
+                RoundedRectangle(cornerRadius: Style.padding)
+                  .stroke(answerString.count == 0 ? Style.colorDisabled : Style.colorContinue, lineWidth: Style.buttonStrokeWidth)
+              )
+              .id("submit")
+          }
+          .disabled(answerString.count == 0)
+
+        } else {
+          Button(action:
+                  { withAnimation {
+                    correctAnswerSubmitted = problemNavigator.checkNumberAnswer(answer: Int(answerString) ?? Int(UInt8.min))
+                    // if (correct) {
+                    //
+                    // }
+
+                  }}
+          )
+          {
+            Text(Strings.submit.capitalized)
+              .fontWeight(.bold)
+              .font(.largeTitle)
+              .foregroundColor(answerString.count == 0 ? Style.colorDisabled : Style.colorMain)
+              .frame(width:Style.buttonSize * 2, height:Style.buttonSize)
+              .overlay(
+                RoundedRectangle(cornerRadius: Style.padding)
+                  .stroke(answerString.count == 0 ? Style.colorDisabled : Style.colorMain, lineWidth: Style.buttonStrokeWidth)
+              )
+              .id("submit")
+          }
+          .disabled(answerString.count == 0)
+
         }
-        .disabled(answerString.count == 0)
         Spacer()
       }
     }

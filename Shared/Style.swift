@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Style {
   static let colorMain = Color.purple
-  static let colorSubmit = Color.green
+  static let colorContinue = Color.green
   static let colorDelete = Color.red
   static let colorDisabled = Color.gray
   static let buttonSize = 100.0

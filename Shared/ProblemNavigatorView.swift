@@ -58,19 +58,11 @@ struct ProblemNavigatorView: View {
       //       it just submits when the answer is right.
       //       Maybe add a submit button, but that is more taps for the user.
       if (answer == correctAnswer) {
-        problemIndex += 1
         showHint = false
       } else {
         showHint = true
       }
-      if (problemIndex >= problems.count) {
-        problemIndex = 0
-        sectionIndex += 1
-        showSectionCompletion = true
-        if (sectionIndex >= sections.count) {
-          sectionIndex = 0
-        }
-      } else if (answer == correctAnswer) {
+      if (answer == correctAnswer) {
         showToast = true
       }
       API.saveLastQuestion(sectionIndex: sectionIndex, problemIndex: problemIndex)
@@ -80,6 +72,22 @@ struct ProblemNavigatorView: View {
     return false
   }
 
+  func gotoNextProblem() {
+    if let sections = API.loadCurriculum() {
+      let section = sections[sectionIndex]
+      let problems = section.problems
+      problemIndex += 1
+      if (problemIndex >= problems.count) {
+        problemIndex = 0
+        sectionIndex += 1
+        showSectionCompletion = true
+        if (sectionIndex >= sections.count) {
+          sectionIndex = 0
+        }
+      }
+    }
+    API.saveLastQuestion(sectionIndex: sectionIndex, problemIndex: problemIndex)
+  }
   
   var body: some View {
     VStack {
@@ -101,8 +109,7 @@ struct ProblemNavigatorView: View {
                 ZStack {
                   VStack {
                     HStack {
-                      Image(systemName: "star")
-                        .imageScale(.large)
+                      Image("dalle-icon")
                       Text("\(Strings.section.capitalized) \(sectionIndex + 1) / \(sections.count)")
                         .padding([.trailing], Style.padding)
                       Text("\(Strings.problem.capitalized) \(problemIndex + 1) / \(problems.count)")
