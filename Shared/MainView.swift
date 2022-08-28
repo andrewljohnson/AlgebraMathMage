@@ -22,9 +22,9 @@ struct MainView: View {
             SectionCompletionView(showSectionCompletion: $showSectionCompletion)
               .transition(.scale)
           } else {
-            ProblemNavigatorView(problemIndex:$problemIndex,
-                                 sectionIndex:$sectionIndex,
-                                 showSectionCompletion:$showSectionCompletion)
+            ProblemNavigator(problemIndex:$problemIndex,
+                             sectionIndex:$sectionIndex,
+                             showSectionCompletion:$showSectionCompletion)
               .transition(AnyTransition.scale.animation(.easeInOut(duration: animationDuration)))
         }
       }

@@ -15,7 +15,7 @@ struct MenuView: View {
   @State private var showMenuSection = -1
   @State private var showMenuSectionList = false
 
-  var MenuView: some View {
+  var body: some View {
       VStack {
         if (showMenuSection > -1) {
           if let sections = API.loadCurriculum() {
@@ -109,8 +109,5 @@ struct MenuView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
   }
 
-  var body: some View {
-    MenuView
-  }
 }
 

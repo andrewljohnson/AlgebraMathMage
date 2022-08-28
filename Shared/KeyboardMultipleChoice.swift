@@ -10,7 +10,7 @@ import SwiftUI
 struct KeyboardMultipleChoice: View {
   
   let buttonTitles:[String]
-  let problemNavigator:ProblemNavigatorView
+  let problemNavigator:ProblemNavigator
   
   var body: some View {
     ForEach(Array(buttonTitles.enumerated()), id: \.element) {
@@ -29,7 +29,6 @@ struct KeyboardMultipleChoice: View {
               .stroke(Style.colorMain, lineWidth: Style.buttonStrokeWidth)
           )
           .id(title)
-
       }
         .padding()
     }

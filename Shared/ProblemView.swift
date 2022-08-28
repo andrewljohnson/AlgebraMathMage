@@ -12,7 +12,7 @@ struct ProblemView: View {
   // tightly coupled with parent so it can call checkAnswer
   // otherwise I'd just bind some variables
   // todo: ?
-  let problemNavigator:ProblemNavigatorView
+  let problemNavigator:ProblemNavigator
   @State var answerString = ""
   
   var body: some View {

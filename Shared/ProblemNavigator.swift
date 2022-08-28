@@ -1,5 +1,5 @@
 //
-//  ProblemNavigatorView.swift
+//  ProblemNavigator.swift
 //  AlgebraMathMage
 //
 //  Created by Andrew Johnson on 8/19/22.
@@ -8,7 +8,7 @@
 import SwiftUI
 import YouTubePlayerKit
 
-struct ProblemNavigatorView: View {
+struct ProblemNavigator: View {
   
   @Binding var problemIndex:Int;
   @Binding var sectionIndex:Int;
@@ -52,11 +52,10 @@ struct ProblemNavigatorView: View {
     if let sections = API.loadCurriculum() {
       let section = sections[sectionIndex]
       let problems = section.problems
-      let correctAnswer = problems[problemIndex].answer
+      let problem = problems[problemIndex]
+      let correctAnswer = problem.answer
 
-      // todo: we don't save user answers because there is no submit button,
-      //       it just submits when the answer is right.
-      //       Maybe add a submit button, but that is more taps for the user.
+      API.saveUserAnswer(problemID: problem.id, sectionID: section.id, answerIndex: answer)
       if (answer == correctAnswer) {
         showHint = false
       } else {

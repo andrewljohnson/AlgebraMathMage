@@ -10,7 +10,7 @@ import SwiftUI
 struct KeyboardIntegers: View {
   
   @Binding var answerString:String
-  let problemNavigator:ProblemNavigatorView
+  let problemNavigator:ProblemNavigator
   @State var correctAnswerSubmitted = false
   
   func buttonRow(labels:[Int]) -> some View {
@@ -86,10 +86,6 @@ struct KeyboardIntegers: View {
           Button(action:
                   { withAnimation {
                     correctAnswerSubmitted = problemNavigator.checkNumberAnswer(answer: Int(answerString) ?? Int(UInt8.min))
-                    // if (correct) {
-                    //
-                    // }
-
                   }}
           )
           {

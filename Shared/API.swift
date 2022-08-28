@@ -23,13 +23,13 @@ struct Problem: Decodable, Hashable {
   enum Category: Decodable {
       case swift, combine, debugging, xcode
   }
-  let id: Int
-  let prompt: String
-  let formula: String
-  let hint: String
-  let buttonTitles: [String]?
   let answer: Int?
   let answerIndex: Int?
+  let buttonTitles: [String]?
+  let formula: String
+  let hint: String
+  let id: Int
+  let prompt: String
   let type: String
 }
 
@@ -83,6 +83,8 @@ class API {
     return nil
   }
 
+  // todo: answerIndex can actually just be a numeric answer too,
+  // but the code wold be the same... maybe clarify/split later
   static func saveUserAnswer(problemID:Int, sectionID: Int, answerIndex:Int) {
     let keychain = KeychainSwift()
     if keychain.get(APIKeys.username) == nil {
