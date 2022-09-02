@@ -186,6 +186,7 @@
 			children = (
 				421FF85828A9E7C6000AB2FC /* AlgebraMathMageApp.swift */,
 				4294A28E28AC1D6C008BD756 /* API.swift */,
+				42E4803B28C23E5100D3BE1A /* CompletionViewChapter.swift */,
 				422A948C28AEE9AE00094E6F /* CompletionViewSection.swift */,
 				42E4802628C014A800D3BE1A /* FormulaHorizontal.swift */,
 				42E4802328C0136B00D3BE1A /* FormulaVertical.swift */,
@@ -198,6 +199,7 @@
 				42E4803828C181ED00D3BE1A /* MenuRowsTopLevel.swift */,
 				422A948F28AEEAF200094E6F /* MenuView.swift */,
 				42E4800E28AFFE8C00D3BE1A /* ProblemNavigator.swift */,
+				42E4803E28C2582100D3BE1A /* ProblemNavigatorHeader.swift */,
 				42E4801128B54F9600D3BE1A /* ProblemView.swift */,
 				42E4802028BFC90700D3BE1A /* ProblemViewFreeform.swift */,
 				42E4801D28BFC6A900D3BE1A /* ProblemViewMultipleChoice.swift */,
@@ -206,8 +208,6 @@
 				4294A2A128AD669E008BD756 /* Toast.swift */,
 				4294A28C28AC1C1C008BD756 /* curriculum.json */,
 				421FF85A28A9E7C9000AB2FC /* Assets.xcassets */,
-				42E4803B28C23E5100D3BE1A /* CompletionViewChapter.swift */,
-				42E4803E28C2582100D3BE1A /* ProblemNavigatorHeader.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";

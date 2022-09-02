@@ -4,11 +4,13 @@ This is an app for iPad to teach kids math, egged on by lots of little videos.
 
 ## Todo 
  * scorecard view
+  * design view
+  * show scorecard on completion
+  * check for mastery before going to next set of 2 sections (and don't go on if they just switch to the last problem)
  * bug: selecting problem in menu before hitting continue leads to weird state
+ * animation between scetion and chapter complete
  
 ### Todo Later/Maybe
- * Randomize answer order
- * Show chapter finish screen (when we have chapters))
  * Bugs
    * limit usage to iPads in build
 

@@ -27,7 +27,7 @@ struct CompletionViewChapter: View {
           .font(.largeTitle)
           .background(.white)
           .foregroundColor(Style.colorContinue)
-          .frame(width:Style.buttonSize * 5, height:Style.buttonSize)
+          .frame(width:Style.buttonSize * 6, height:Style.buttonSize)
           .overlay(
             RoundedRectangle(cornerRadius: Style.padding)
               .stroke(Style.colorContinue, lineWidth: Style.buttonStrokeWidth)
