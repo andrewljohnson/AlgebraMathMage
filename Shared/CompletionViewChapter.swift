@@ -1,5 +1,5 @@
 //
-//  SectionComplete.swift
+//  CompletionViewChapter.swift
 //  AlgebraMathMage
 //
 //  Created by Andrew Johnson on 8/18/22.
@@ -7,22 +7,22 @@
 
 import SwiftUI
 
-struct SectionCompletionView: View {
+struct CompletionViewChapter: View {
 
-  @Binding var showSectionCompletion:Bool;
+  @Binding var showChapterCompletion:Bool;
 
   var body: some View {
     VStack {
       Spacer()
-      Text(Strings.sectionCompleteCongratulations)
+      Text(Strings.chapterCompleteCongratulations)
         .frame(maxWidth: .infinity)
         .font(.largeTitle)
       Button(action:
         withAnimation {{
-        showSectionCompletion = false
+        showChapterCompletion = false
         }})
       {
-        Text(Strings.continueToNextSection)
+        Text(Strings.continueToNextChapter)
           .fontWeight(.bold)
           .font(.largeTitle)
           .background(.white)

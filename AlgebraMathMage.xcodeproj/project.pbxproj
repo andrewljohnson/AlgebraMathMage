@@ -18,8 +18,8 @@
 		421FF88428A9E7C9000AB2FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 421FF85A28A9E7C9000AB2FC /* Assets.xcassets */; };
 		421FF88528A9E7C9000AB2FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 421FF85A28A9E7C9000AB2FC /* Assets.xcassets */; };
 		422A948B28AEE1D000094E6F /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 422A948A28AEE1D000094E6F /* YouTubePlayerKit */; };
-		422A948D28AEE9AE00094E6F /* SectionCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422A948C28AEE9AE00094E6F /* SectionCompletionView.swift */; };
-		422A948E28AEE9AE00094E6F /* SectionCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422A948C28AEE9AE00094E6F /* SectionCompletionView.swift */; };
+		422A948D28AEE9AE00094E6F /* CompletionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422A948C28AEE9AE00094E6F /* CompletionViewSection.swift */; };
+		422A948E28AEE9AE00094E6F /* CompletionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422A948C28AEE9AE00094E6F /* CompletionViewSection.swift */; };
 		422A949028AEEAF200094E6F /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422A948F28AEEAF200094E6F /* MenuView.swift */; };
 		422A949128AEEAF200094E6F /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422A948F28AEEAF200094E6F /* MenuView.swift */; };
 		4294A28B28AC15AE008BD756 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4294A28A28AC15AE008BD756 /* Launch Screen.storyboard */; };
@@ -59,6 +59,8 @@
 		42E4803728C17CB300D3BE1A /* MenuRowsProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4803528C17CB300D3BE1A /* MenuRowsProblems.swift */; };
 		42E4803928C181ED00D3BE1A /* MenuRowsTopLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4803828C181ED00D3BE1A /* MenuRowsTopLevel.swift */; };
 		42E4803A28C181ED00D3BE1A /* MenuRowsTopLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4803828C181ED00D3BE1A /* MenuRowsTopLevel.swift */; };
+		42E4803C28C23E5100D3BE1A /* CompletionViewChapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4803B28C23E5100D3BE1A /* CompletionViewChapter.swift */; };
+		42E4803D28C23E5100D3BE1A /* CompletionViewChapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4803B28C23E5100D3BE1A /* CompletionViewChapter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,7 +93,7 @@
 		421FF87828A9E7C9000AB2FC /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		421FF87C28A9E7C9000AB2FC /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		421FF87E28A9E7C9000AB2FC /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
-		422A948C28AEE9AE00094E6F /* SectionCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCompletionView.swift; sourceTree = "<group>"; };
+		422A948C28AEE9AE00094E6F /* CompletionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionViewSection.swift; sourceTree = "<group>"; };
 		422A948F28AEEAF200094E6F /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		4294A28A28AC15AE008BD756 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		4294A28C28AC1C1C008BD756 /* curriculum.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = curriculum.json; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 		42E4803228C17BC500D3BE1A /* MenuRowsSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRowsSections.swift; sourceTree = "<group>"; };
 		42E4803528C17CB300D3BE1A /* MenuRowsProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRowsProblems.swift; sourceTree = "<group>"; };
 		42E4803828C181ED00D3BE1A /* MenuRowsTopLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRowsTopLevel.swift; sourceTree = "<group>"; };
+		42E4803B28C23E5100D3BE1A /* CompletionViewChapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionViewChapter.swift; sourceTree = "<group>"; };
 		A4800FB01CC139A6FAA3297F /* Pods_AlgebraMathMage__iOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlgebraMathMage__iOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD0B1EA5D2F388B7486EA25F /* Pods_AlgebraMathMage__macOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlgebraMathMage__macOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -180,6 +183,7 @@
 			children = (
 				421FF85828A9E7C6000AB2FC /* AlgebraMathMageApp.swift */,
 				4294A28E28AC1D6C008BD756 /* API.swift */,
+				422A948C28AEE9AE00094E6F /* CompletionViewSection.swift */,
 				42E4802628C014A800D3BE1A /* FormulaHorizontal.swift */,
 				42E4802328C0136B00D3BE1A /* FormulaVertical.swift */,
 				42E4801428B960D200D3BE1A /* KeyboardIntegers.swift */,
@@ -194,12 +198,12 @@
 				42E4801128B54F9600D3BE1A /* ProblemView.swift */,
 				42E4802028BFC90700D3BE1A /* ProblemViewFreeform.swift */,
 				42E4801D28BFC6A900D3BE1A /* ProblemViewMultipleChoice.swift */,
-				422A948C28AEE9AE00094E6F /* SectionCompletionView.swift */,
 				4294A29528AC265B008BD756 /* Strings.swift */,
 				4294A29228AC2576008BD756 /* Style.swift */,
 				4294A2A128AD669E008BD756 /* Toast.swift */,
 				4294A28C28AC1C1C008BD756 /* curriculum.json */,
 				421FF85A28A9E7C9000AB2FC /* Assets.xcassets */,
+				42E4803B28C23E5100D3BE1A /* CompletionViewChapter.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -416,11 +420,12 @@
 				421FF88228A9E7C9000AB2FC /* MainView.swift in Sources */,
 				42E4802728C014A800D3BE1A /* FormulaHorizontal.swift in Sources */,
 				422A949028AEEAF200094E6F /* MenuView.swift in Sources */,
+				42E4803C28C23E5100D3BE1A /* CompletionViewChapter.swift in Sources */,
 				42E4802428C0136B00D3BE1A /* FormulaVertical.swift in Sources */,
 				42E4801828B965B300D3BE1A /* KeyboardMultipleChoice.swift in Sources */,
 				42E4803028C17ADF00D3BE1A /* MenuRowsChapters.swift in Sources */,
 				4294A28F28AC1D6C008BD756 /* API.swift in Sources */,
-				422A948D28AEE9AE00094E6F /* SectionCompletionView.swift in Sources */,
+				422A948D28AEE9AE00094E6F /* CompletionViewSection.swift in Sources */,
 				42E4803328C17BC500D3BE1A /* MenuRowsSections.swift in Sources */,
 				42E4801228B54F9600D3BE1A /* ProblemView.swift in Sources */,
 				42E4803928C181ED00D3BE1A /* MenuRowsTopLevel.swift in Sources */,
@@ -443,11 +448,12 @@
 				421FF88328A9E7C9000AB2FC /* MainView.swift in Sources */,
 				42E4802828C014A800D3BE1A /* FormulaHorizontal.swift in Sources */,
 				422A949128AEEAF200094E6F /* MenuView.swift in Sources */,
+				42E4803D28C23E5100D3BE1A /* CompletionViewChapter.swift in Sources */,
 				42E4802528C0136B00D3BE1A /* FormulaVertical.swift in Sources */,
 				42E4801928B965B300D3BE1A /* KeyboardMultipleChoice.swift in Sources */,
 				42E4803128C17ADF00D3BE1A /* MenuRowsChapters.swift in Sources */,
 				4294A29028AC1F17008BD756 /* API.swift in Sources */,
-				422A948E28AEE9AE00094E6F /* SectionCompletionView.swift in Sources */,
+				422A948E28AEE9AE00094E6F /* CompletionViewSection.swift in Sources */,
 				42E4803428C17BC500D3BE1A /* MenuRowsSections.swift in Sources */,
 				42E4801328B54F9600D3BE1A /* ProblemView.swift in Sources */,
 				42E4803A28C181ED00D3BE1A /* MenuRowsTopLevel.swift in Sources */,

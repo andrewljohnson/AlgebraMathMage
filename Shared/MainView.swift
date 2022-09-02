@@ -20,11 +20,11 @@ struct MainView: View {
   
   var body: some View {
         ZStack(alignment: .leading) {
-          if (self.showChapterCompletion) {
-            //SectionCompletionView(showSectionCompletion: $showSectionCompletion)
-            //  .transition(.scale)
-          } else if (self.showSectionCompletion) {
-            SectionCompletionView(showSectionCompletion: $showSectionCompletion)
+          if (self.showSectionCompletion) {
+            CompletionViewSection(showSectionCompletion: $showSectionCompletion)
+            .transition(.scale)
+          } else if (self.showChapterCompletion) {
+            CompletionViewChapter(showChapterCompletion: $showChapterCompletion)
               .transition(.scale)
           } else {
             ProblemNavigator(problemIndex:$problemIndex,

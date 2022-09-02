@@ -52,10 +52,8 @@ struct ProblemNavigator: View {
   func gotoNextProblem() {
     if let curriculum = API.loadCurriculum() {
       let chapters = curriculum.chapters
-      let chapter = chapters[chapterIndex]
-      let sections = chapter.sections
-      let section = chapter.sections[sectionIndex]
-      let problemIDs = section.problemIDs
+      let sections = chapters[chapterIndex].sections
+      let problemIDs = chapters[chapterIndex].sections[sectionIndex].problemIDs
       problemIndex += 1
       if (problemIndex >= problemIDs.count) {
         showLast = false
@@ -64,7 +62,7 @@ struct ProblemNavigator: View {
         showSectionCompletion = true
         if (sectionIndex >= sections.count) {
           chapterIndex += 1
-          // showChapterCompletion = true
+          showChapterCompletion = true
         }
 
         if (chapterIndex >= chapters.count) {

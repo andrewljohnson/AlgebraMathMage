@@ -10,8 +10,10 @@ import SwiftUI
 struct Strings {
   static let appTitle = "Algebra Mage"
   static let chapter = "chapter"
+  static let chapterCompleteCongratulations = "You completed a chapter, great job!"
   static let clearData = "clear data"
   static let continueWord = "continue"
+  static let continueToNextChapter = "Continue to Next Chapter"
   static let continueToNextSection = "Continue to Next Section"
   static let correctGoodJob = "Correct, good job!"
   static let currentProblem = "current problem"
@@ -22,6 +24,6 @@ struct Strings {
   static let problem = "problem"
   static let problems = "problems"
   static let section = "section"
-  static let sectionCompleteCongratulations = "Your completed a section, great job!"
+  static let sectionCompleteCongratulations = "You completed a section, great job!"
   static let submit = "submit"
 }

@@ -29,7 +29,7 @@ struct ProblemViewFreeform: View {
       let previousProblem = problemNavigator.problemIndex == 0 ? problem : problems[problemNavigator.problemIndex - 1]
       VStack {
           if (textFormula != nil) {
-            FormulaHorizontal(problemNavigator: problemNavigator, answerString: $answerString, correctAnswerSubmitted: $correctAnswerSubmitted)
+            FormulaHorizontal(problem: problem, answerString: $answerString, correctAnswerSubmitted: $correctAnswerSubmitted)
           } else if (formulaOrientation == "vertical" && formulaNumbers != nil) {
             if (problemNavigator.showLast) {
               HStack {

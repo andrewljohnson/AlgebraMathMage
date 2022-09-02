@@ -89,6 +89,16 @@ class API {
     return nil
   }
   
+  static func problemForIndices(chapterIndex:Int, sectionIndex:Int, problemIndex:Int) -> Problem? {
+    if let curriculum = API.loadCurriculum() {
+      let chapter = curriculum.chapters[chapterIndex]
+      let section = chapter.sections[sectionIndex]
+      let problems = API.problemsForIDs(problemIDs: section.problemIDs)
+      return problems[problemIndex]
+    }
+    return nil
+  }
+
   static func problemForID(problemID:Int) -> Problem? {
     if let curriculum = API.loadCurriculum() {
       for p in curriculum.problems {
