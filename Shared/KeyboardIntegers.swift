@@ -10,8 +10,8 @@ import SwiftUI
 struct KeyboardIntegers: View {
   
   @Binding var answerString:String
+  @Binding var correctAnswerSubmitted:Bool
   let problemNavigator:ProblemNavigator
-  @State var correctAnswerSubmitted = false
   
   func buttonRow(labels:[Int]) -> some View {
     HStack {
@@ -26,14 +26,15 @@ struct KeyboardIntegers: View {
           Text("\(number)")
             .fontWeight(.bold)
             .font(.largeTitle)
-            .foregroundColor(Style.colorMain)
+            .foregroundColor(correctAnswerSubmitted ? Style.colorDisabled : Style.colorMain)
             .frame(width:Style.buttonSize, height:Style.buttonSize)
             .overlay(
               Rectangle()
-                .stroke(Style.colorMain, lineWidth: Style.buttonStrokeWidth)
+                .stroke(correctAnswerSubmitted ? Style.colorDisabled : Style.colorMain, lineWidth: Style.buttonStrokeWidth)
             )
             .id(number)
         }
+        .disabled(correctAnswerSubmitted)
         .padding()
       }
     }
@@ -43,7 +44,6 @@ struct KeyboardIntegers: View {
     VStack {
       buttonRow(labels:[0, 1, 2, 3, 4])
       buttonRow(labels:[5, 6, 7, 8, 9])
-      Spacer()
       HStack {
         Spacer()
         Button(action:
@@ -55,10 +55,10 @@ struct KeyboardIntegers: View {
           Image(systemName: "delete.backward.fill")
             .resizable()
             .frame(width: Style.buttonSize, height: Style.buttonSize / 4*3)
-            .foregroundColor(answerString.count == 0 ? Style.colorDisabled : Style.colorDelete)
+            .foregroundColor(answerString.count == 0 || correctAnswerSubmitted ? Style.colorDisabled : Style.colorDelete)
             .id("delete")
         }
-        .disabled(answerString.count == 0)
+        .disabled(answerString.count == 0 || correctAnswerSubmitted)
         Spacer()
         if (correctAnswerSubmitted) {
           Button(action:
@@ -85,7 +85,7 @@ struct KeyboardIntegers: View {
         } else {
           Button(action:
                   { withAnimation {
-                    correctAnswerSubmitted = problemNavigator.checkNumberAnswer(answer: Int(answerString) ?? Int(UInt8.min))
+                    correctAnswerSubmitted = problemNavigator.checkAnswer(answer: Int(answerString) ?? Int(UInt8.min), gotoNext: false)
                   }}
           )
           {

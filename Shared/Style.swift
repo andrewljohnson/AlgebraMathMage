@@ -12,7 +12,7 @@ struct Style {
   static let colorContinue = Color.green
   static let colorDelete = Color.red
   static let colorDisabled = Color.gray
-  static let buttonSize = 100.0
+  static let buttonSize = 80.0
   static let padding = 20.0
   static let buttonStrokeWidth = 8.0
   static let paddingBelowPrompt = 40.0

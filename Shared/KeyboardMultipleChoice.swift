@@ -13,24 +13,26 @@ struct KeyboardMultipleChoice: View {
   let problemNavigator:ProblemNavigator
   
   var body: some View {
-    ForEach(Array(buttonTitles.enumerated()), id: \.element) {
-      answerIndex, title in
-      Button(action:
-              { withAnimation { problemNavigator.checkAnswer(answerIndex: answerIndex) }}
-      )
-      {
-        Text(title)
-          .fontWeight(.bold)
-          .font(.largeTitle)
-          .foregroundColor(Style.colorMain)
-          .frame(width:Style.buttonSize * 2, height:Style.buttonSize)
-          .overlay(
-            RoundedRectangle(cornerRadius: Style.padding)
-              .stroke(Style.colorMain, lineWidth: Style.buttonStrokeWidth)
-          )
-          .id(title)
+    HStack {
+      ForEach(Array(buttonTitles.enumerated()), id: \.element) {
+        answerIndex, title in
+        Button(action:
+                { withAnimation { _ = problemNavigator.checkAnswer(answer: answerIndex, gotoNext: true) }}
+        )
+        {
+          Text(title)
+            .fontWeight(.bold)
+            .font(.largeTitle)
+            .foregroundColor(Style.colorMain)
+            .frame(width:Style.buttonSize * 2, height:Style.buttonSize)
+            .overlay(
+              RoundedRectangle(cornerRadius: Style.padding)
+                .stroke(Style.colorMain, lineWidth: Style.buttonStrokeWidth)
+            )
+            .id(title)
+        }
+          .padding()
       }
-        .padding()
     }
   }
 }

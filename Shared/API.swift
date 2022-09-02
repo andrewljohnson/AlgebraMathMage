@@ -10,7 +10,9 @@ import KeychainSwift
 import Security
 
 struct APIKeys {
+  static let chapterIndex = "chapterIndex"
   static let multipleChoice = "multiple_choice"
+  static let lastChapterIndex = "lastChapterIndex"
   static let lastSectionIndex = "lastSectionIndex"
   static let lastProblemIndex = "lastProblemIndex"
   static let sectionIndex = "sectionIndex"
@@ -24,12 +26,14 @@ struct Problem: Decodable, Hashable {
       case swift, combine, debugging, xcode
   }
   let answer: Int?
-  let answerIndex: Int?
   let buttonTitles: [String]?
-  let formula: String
+  let formula: String?
+  let formulaNumbers: [Int]?
+  let formulaOperation: String?
+  let formulaOrientation: String?
   let hint: String
   let id: Int
-  let prompt: String
+  let prompt: String?
   let type: String
 }
 
@@ -39,26 +43,44 @@ struct Section: Decodable, Hashable {
   }
   let id: Int
   let sectionTitle: String
+  let problemIDs: [Int]
+}
+
+struct Chapter: Decodable, Hashable {
+  enum Category: Decodable {
+      case swift, combine, debugging, xcode
+  }
+  let id: Int
+  let chapterTitle: String
+  let sections: [Section]
+}
+
+struct Curriculum: Decodable, Hashable {
+  enum Category: Decodable {
+      case swift, combine, debugging, xcode
+  }
+  let chapters: [Chapter]
   let problems: [Problem]
 }
 
-struct Answer: Encodable, Decodable, Hashable {
+struct AnswerRecord: Encodable, Decodable, Hashable {
     enum Category: Decodable {
         case swift, combine, debugging, xcode
     }
+    let chapterID: Int
     let sectionID: Int
     let problemID: Int
-    var answerIndices: [Int]
+    var answers: [Int]
 }
 
 // todo: make this use a server
 class API {
-  static func loadCurriculum() -> [Section]? {
+  static func loadCurriculum() -> Curriculum? {
     if let url = Bundle.main.url(forResource: "curriculum", withExtension: "json") {
          do {
              let data = try Data(contentsOf: url)
              let decoder = JSONDecoder()
-             let jsonData = try decoder.decode([Section].self, from: data)
+             let jsonData = try decoder.decode(Curriculum.self, from: data)
              return jsonData
          } catch {
              print("error:\(error)")
@@ -67,7 +89,32 @@ class API {
     return nil
   }
   
-  static func answerArrayToData(answerArray: [Answer]) -> Data? {
+  static func problemForID(problemID:Int) -> Problem? {
+    if let curriculum = API.loadCurriculum() {
+      for p in curriculum.problems {
+        if (p.id == problemID) {
+          return p
+        }
+      }
+    }
+    return nil
+  }
+
+  static func problemsForIDs(problemIDs:[Int]) -> [Problem] {
+    if let curriculum = API.loadCurriculum() {
+      var problems:[Problem] = []
+      for p in curriculum.problems {
+        if (problemIDs.contains(p.id)) {
+          problems.append(p)
+        }
+      }
+      return problems
+    }
+    return []
+  }
+
+  
+  static func answerArrayToData(answerArray: [AnswerRecord]) -> Data? {
     let encoder = JSONEncoder()
     if let jsonData = try? encoder.encode(answerArray) {
       return jsonData
@@ -75,17 +122,17 @@ class API {
     return nil
   }
   
-  static func dataToAnswerArray(data: Data) -> [Answer]? {
+  static func dataToAnswerArray(data: Data) -> [AnswerRecord]? {
     let decoder = JSONDecoder()
-    if let answerArray = try? decoder.decode([Answer].self, from: data) {
+    if let answerArray = try? decoder.decode([AnswerRecord].self, from: data) {
       return answerArray
     }
     return nil
   }
 
-  // todo: answerIndex can actually just be a numeric answer too,
-  // but the code wold be the same... maybe clarify/split later
-  static func saveUserAnswer(problemID:Int, sectionID: Int, answerIndex:Int) {
+  
+  // answerGiven is either a numeric answer or the index of a multiple choice answer
+  static func saveUserAnswer(problemID:Int, sectionID: Int, chapterID: Int, answerGiven:Int) {
     let keychain = KeychainSwift()
     if keychain.get(APIKeys.username) == nil {
       // todo: set a random username from server
@@ -102,17 +149,17 @@ class API {
       if let dataAnswers = keychain.getData(answersLookupKey) {
         if var answers = API.dataToAnswerArray(data:dataAnswers) {
           var found = false
-          let newAnswers: [Answer] = answers.map { answer in
-            if (answer.sectionID == sectionID && answer.problemID == problemID) {
-              var answerIndices = answer.answerIndices
-              answerIndices.append(answerIndex)
+          let newAnswers: [AnswerRecord] = answers.map { answer in
+            if (answer.chapterID == chapterID && answer.sectionID == sectionID && answer.problemID == problemID) {
+              var previousAnswers = answer.answers
+              previousAnswers.append(answerGiven)
               found = true
-              return Answer(sectionID: answer.sectionID, problemID: answer.problemID, answerIndices: answerIndices)
+              return AnswerRecord(chapterID: answer.chapterID, sectionID: answer.sectionID, problemID: answer.problemID, answers: previousAnswers)
             }
             return answer
           }
           if (!found) {
-            let newAnswer:Answer = Answer(sectionID: sectionID, problemID: problemID, answerIndices: [answerIndex])
+            let newAnswer:AnswerRecord = AnswerRecord(chapterID: chapterID, sectionID: sectionID, problemID: problemID, answers: [answerGiven])
             answers.append(newAnswer)
             if let data = API.answerArrayToData(answerArray:answers) {
               keychain.set(data, forKey: answersLookupKey)
@@ -127,18 +174,19 @@ class API {
     }
   }
 
-  static func saveLastQuestion(sectionIndex: Int, problemIndex: Int) {
+  static func saveLastQuestion(chapterIndex: Int, sectionIndex: Int, problemIndex: Int) {
     let keychain = KeychainSwift()
+    keychain.set("\(chapterIndex)", forKey: APIKeys.lastChapterIndex)
     keychain.set("\(sectionIndex)", forKey: APIKeys.lastSectionIndex)
     keychain.set("\(problemIndex)", forKey: APIKeys.lastProblemIndex)
   }
 
   static func getLastQuestion() -> [String:Int] {
     let keychain = KeychainSwift()
-    if let sectionIndex = keychain.get(APIKeys.lastSectionIndex), let problemIndex = keychain.get(APIKeys.lastProblemIndex) {
-      return [APIKeys.sectionIndex: Int(sectionIndex) ?? 0, APIKeys.problemIndex: Int(problemIndex) ?? 0]
+    if let chapterIndex = keychain.get(APIKeys.lastChapterIndex), let sectionIndex = keychain.get(APIKeys.lastSectionIndex), let problemIndex = keychain.get(APIKeys.lastProblemIndex) {
+      return [APIKeys.chapterIndex: Int(chapterIndex) ?? 0, APIKeys.sectionIndex: Int(sectionIndex) ?? 0, APIKeys.problemIndex: Int(problemIndex) ?? 0]
     }
-    return [APIKeys.sectionIndex: 0, APIKeys.problemIndex: 0]
+    return [APIKeys.chapterIndex: 0, APIKeys.sectionIndex: 0, APIKeys.problemIndex: 0]
   }
   
   static func printKeychain() {
@@ -149,7 +197,7 @@ class API {
       } else {
         if let data = keychain.getData(keykey), let answers = API.dataToAnswerArray(data: data) {
           for answer in answers {
-            print("sectionID: \(answer.sectionID), problemID: \(answer.problemID), answers: \(answer.answerIndices)")
+            print("chapterID: \(answer.chapterID), sectionID: \(answer.sectionID), problemID: \(answer.problemID), answers: \(answer.answers)")
           }
         }
       }
@@ -159,6 +207,7 @@ class API {
   static func clearKeychain() {
     let keychain = KeychainSwift()
     keychain.clear()
+    keychain.set("0", forKey: APIKeys.lastChapterIndex)
     keychain.set("0", forKey: APIKeys.lastSectionIndex)
     keychain.set("0", forKey: APIKeys.lastProblemIndex)
   }

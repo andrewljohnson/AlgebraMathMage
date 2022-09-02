@@ -1,83 +1,135 @@
-[
-  {
-    "sectionTitle": "Multiplication Facts",
-    "id": 0,
-    "problems": [
-      {
-        "id": 5,
-        "prompt": "",
-        "formula": "2 x 1 =",
-        "hint": "Any number times 1 is it self.",
-        "answer": 2,
-        "buttonTitles": null,
-        "type": "number"
-      },
-      {
-        "id": 6,
-        "prompt": "",
-        "formula": "2 x 2 =",
-        "hint": "This is the same as 2 + 2, since 2 x 2 means something like 2 piles of 2 cookies.",
-        "answer": 4,
-        "buttonTitles": null,
-        "type": "number"
-      }
-    ]
-  },
-  {
-    "sectionTitle": "Variables",
-    "id": 1,
-    "problems": [
-      {
-        "id": 0,
-        "prompt": "What is the value X?",
-        "formula": "3 - X = 1",
-        "hint": "This is the same as 3 - 1 = X. So what is X?",
-        "buttonTitles": ["1", "2", "3"],
-        "answerIndex": 1,
-        "type": "multiple_choice"
-      },
-      {
-        "id": 1,
-        "prompt": "What is the value of X?",
-        "formula": "1 + X = 2",
-        "hint": "This is the same as 2 - 1 = X. So what is X?",
-        "buttonTitles": ["1", "2", "3"],
-        "answerIndex": 0,
-        "type": "multiple_choice"
-      },
-      {
-        "id": 2,
-        "prompt": "What would you call X in this formula?",
-        "formula": "1 + X = 1",
-        "hint": "Variables are symbols in math that represent an amount. X is a variable.",
-        "buttonTitles": ["a variable", "a florp", "a dorp"],
-        "answerIndex": 0,
-        "type": "multiple_choice"
-      }
-    ]
-  },
-  {
-    "sectionTitle": "More Variables",
-    "id": 2,
-    "problems": [
-      {
-        "id": 3,
-        "prompt": "What is the value of X?",
-        "formula": "9 - X = 1",
-        "hint": "This is the same as 9 - 1 = X. So what is X?",
-        "buttonTitles": ["1", "8", "17"],
-        "answerIndex": 1,
-        "type": "multiple_choice"
-      },
-      {
-        "id": 4,
-        "prompt": "What is the value of X?",
-        "formula": "17 - X = 11",
-        "hint": "This is the same as 17 - 11 = X. So what is X?",
-        "buttonTitles": ["1", "2", "6"],
-        "answerIndex": 2,
-        "type": "multiple_choice"
-      }
-    ]
-  }
-]
+{
+  "chapters": [
+    {
+      "id": 0,
+      "chapterTitle": "Multiplication Facts",
+      "sections": [
+        {
+          "sectionTitle": "Multiplication by 2 (in order)",
+          "id": 0,
+          "problemIDs": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        }
+      ]
+    }
+  ],
+  "problems": [
+    {
+      "id": 0,
+      "formulaNumbers": [
+        2,
+        1
+      ],
+      "hint": "This means something like 1 piles of 2 cookies.",
+      "answer": 2,
+      "formulaOperation": "multiplication",
+      "formulaOrientation": "vertical",
+      "type": "number"
+    },
+    {
+      "id": 1,
+      "formulaNumbers": [
+        2,
+        2
+      ],
+      "hint": "This means something like 2 piles of 2 cookies.",
+      "answer": 4,
+      "formulaOperation": "multiplication",
+      "formulaOrientation": "vertical",
+      "type": "number"
+    },
+    {
+      "id": 2,
+      "formulaNumbers": [
+        2,
+        3
+      ],
+      "hint": "This means something like 3 piles of 2 cookies.",
+      "answer": 6,
+      "formulaOperation": "multiplication",
+      "formulaOrientation": "vertical",
+      "type": "number"
+    },
+    {
+      "id": 3,
+      "formulaNumbers": [
+        2,
+        4
+      ],
+      "hint": "This means something like 4 piles of 2 cookies.",
+      "answer": 8,
+      "formulaOperation": "multiplication",
+      "formulaOrientation": "vertical",
+      "type": "number"
+    },
+    {
+      "id": 4,
+      "formulaNumbers": [
+        2,
+        5
+      ],
+      "hint": "This means something like 5 piles of 2 cookies.",
+      "answer": 10,
+      "formulaOperation": "multiplication",
+      "formulaOrientation": "vertical",
+      "type": "number"
+    },
+    {
+      "id": 5,
+      "formulaNumbers": [
+        2,
+        6
+      ],
+      "hint": "This means something like 6 piles of 2 cookies.",
+      "answer": 12,
+      "formulaOperation": "multiplication",
+      "formulaOrientation": "vertical",
+      "type": "number"
+    },
+    {
+      "id": 6,
+      "formulaNumbers": [
+        2,
+        7
+      ],
+      "hint": "This means something like 7 piles of 2 cookies.",
+      "answer": 14,
+      "formulaOperation": "multiplication",
+      "formulaOrientation": "vertical",
+      "type": "number"
+    },
+    {
+      "id": 7,
+      "formulaNumbers": [
+        2,
+        8
+      ],
+      "hint": "This means something like 8 piles of 2 cookies.",
+      "answer": 16,
+      "formulaOperation": "multiplication",
+      "formulaOrientation": "vertical",
+      "type": "number"
+    },
+    {
+      "id": 8,
+      "formulaNumbers": [
+        2,
+        9
+      ],
+      "hint": "This means something like 9 piles of 2 cookies.",
+      "answer": 18,
+      "formulaOperation": "multiplication",
+      "formulaOrientation": "vertical",
+      "type": "number"
+    }
+  ]
+}

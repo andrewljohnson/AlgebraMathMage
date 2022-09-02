@@ -3,7 +3,7 @@
 This is an app for iPad to teach kids math, egged on by lots of little videos.
 
 ## Todo 
- * various problem forms for multiplication
+ * script to generate multiplication curriculum
  
 ### Todo Later/Maybe
  * Randomize answer order

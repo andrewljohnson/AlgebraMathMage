@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Strings {
   static let appTitle = "Algebra Mage"
+  static let chapter = "chapter"
   static let clearData = "clear data"
   static let continueWord = "continue"
   static let continueToNextSection = "Continue to Next Section"

@@ -12,7 +12,10 @@ struct ProblemNavigator: View {
   
   @Binding var problemIndex:Int;
   @Binding var sectionIndex:Int;
+  @Binding var chapterIndex:Int;
   @Binding var showSectionCompletion:Bool;
+  @Binding var showChapterCompletion:Bool;
+  @State var showLast = false
   @State var showHint = false
   @State var showMenu = false
   @State private var showToast = false
@@ -20,51 +23,26 @@ struct ProblemNavigator: View {
   // rick roll
   let youTubePlayer: YouTubePlayer = "https://youtube.com/watch?v=dQw4w9WgXcQ"
   
-  func checkAnswer (answerIndex:Int) {
-    if let sections = API.loadCurriculum() {
-      let section = sections[sectionIndex]
-      let problems = section.problems
-      let problem = problems[problemIndex]
-      let correctAnswer = problem.answerIndex
-      API.saveUserAnswer(problemID: problem.id, sectionID: section.id, answerIndex: answerIndex)
-      API.printKeychain()
-      if (answerIndex == correctAnswer) {
-        problemIndex += 1
-        showHint = false
-      } else {
-        showHint = true
-      }
-      if (problemIndex >= problems.count) {
-        problemIndex = 0
-        sectionIndex += 1
-        showSectionCompletion = true
-        if (sectionIndex >= sections.count) {
-          sectionIndex = 0
-        }
-      } else if (answerIndex == correctAnswer) {
-        showToast = true
-      }
-    }
-    API.saveLastQuestion(sectionIndex: sectionIndex, problemIndex: problemIndex)
-  }
-  
-  func checkNumberAnswer (answer:Int) -> Bool {
-    if let sections = API.loadCurriculum() {
-      let section = sections[sectionIndex]
-      let problems = section.problems
+  func checkAnswer(answer:Int, gotoNext:Bool) -> Bool {
+    if let curriculum = API.loadCurriculum() {
+      let chapter = curriculum.chapters[chapterIndex]
+      let section = chapter.sections[sectionIndex]
+      let problems = API.problemsForIDs(problemIDs: section.problemIDs)
       let problem = problems[problemIndex]
       let correctAnswer = problem.answer
-
-      API.saveUserAnswer(problemID: problem.id, sectionID: section.id, answerIndex: answer)
+      API.saveUserAnswer(problemID: problem.id, sectionID: section.id, chapterID: chapter.id, answerGiven: answer)
+      API.printKeychain()
+      if (problemIndex < problems.count && answer == correctAnswer) {
+        showToast = true
+      }
       if (answer == correctAnswer) {
+        if (gotoNext) {
+          gotoNextProblem()
+        }
         showHint = false
       } else {
         showHint = true
       }
-      if (answer == correctAnswer) {
-        showToast = true
-      }
-      API.saveLastQuestion(sectionIndex: sectionIndex, problemIndex: problemIndex)
       return answer == correctAnswer
     }
     // should never get here
@@ -72,20 +50,34 @@ struct ProblemNavigator: View {
   }
 
   func gotoNextProblem() {
-    if let sections = API.loadCurriculum() {
-      let section = sections[sectionIndex]
-      let problems = section.problems
+    if let curriculum = API.loadCurriculum() {
+      let chapters = curriculum.chapters
+      let chapter = chapters[chapterIndex]
+      let sections = chapter.sections
+      let section = chapter.sections[sectionIndex]
+      let problemIDs = section.problemIDs
       problemIndex += 1
-      if (problemIndex >= problems.count) {
+      if (problemIndex >= problemIDs.count) {
+        showLast = false
         problemIndex = 0
         sectionIndex += 1
         showSectionCompletion = true
         if (sectionIndex >= sections.count) {
+          chapterIndex += 1
+          // showChapterCompletion = true
+        }
+
+        if (chapterIndex >= chapters.count) {
+          chapterIndex = 0
+          sectionIndex = 0
+        } else if (sectionIndex >= sections.count) {
           sectionIndex = 0
         }
+      } else {
+        showLast = true
       }
     }
-    API.saveLastQuestion(sectionIndex: sectionIndex, problemIndex: problemIndex)
+    API.saveLastQuestion(chapterIndex: chapterIndex, sectionIndex: sectionIndex, problemIndex: problemIndex)
   }
   
   var body: some View {
@@ -101,17 +93,22 @@ struct ProblemNavigator: View {
           YouTubePlayerView(self.youTubePlayer)
             .onAppear { youTubePlayer.configuration = .init(autoPlay: true) }
       } else {
-        if let sections = API.loadCurriculum() {
+        if let curriculum = API.loadCurriculum() {
+          let chapters = curriculum.chapters
+          let chapter = chapters[chapterIndex]
+          let sections = chapter.sections
           let section = sections[sectionIndex]
-          let problems = section.problems
+          let problemIDs = section.problemIDs
               GeometryReader { geometry in
                 ZStack {
                   VStack {
                     HStack {
                       Image("dalle-icon")
+                      Text("\(Strings.chapter.capitalized) \(chapterIndex + 1) / \(chapters.count)")
+                        .padding([.trailing], Style.padding)
                       Text("\(Strings.section.capitalized) \(sectionIndex + 1) / \(sections.count)")
                         .padding([.trailing], Style.padding)
-                      Text("\(Strings.problem.capitalized) \(problemIndex + 1) / \(problems.count)")
+                      Text("\(Strings.problem.capitalized) \(problemIndex + 1) / \(problemIDs.count)")
                       Spacer()
                       Button(action: { withAnimation { showMenu = !showMenu } })
                       {
@@ -138,7 +135,7 @@ struct ProblemNavigator: View {
                   .toast(message: Strings.correctGoodJob, isShowing: $showToast, duration: Toast.short)
               }
               if self.showMenu {
-                MenuView(showMenu: $showMenu, sectionIndex: $sectionIndex, problemIndex: $problemIndex)
+                MenuView(showMenu: $showMenu, chapterIndex: $chapterIndex, sectionIndex: $sectionIndex, problemIndex: $problemIndex)
                     .background(.black)
                     .frame(width: geometry.size.width/4, height: geometry.size.height)
                     .offset(x: geometry.size.width/4*3)

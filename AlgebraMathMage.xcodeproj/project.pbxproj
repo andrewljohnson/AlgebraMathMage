@@ -42,6 +42,23 @@
 		42E4801628B960D200D3BE1A /* KeyboardIntegers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4801428B960D200D3BE1A /* KeyboardIntegers.swift */; };
 		42E4801828B965B300D3BE1A /* KeyboardMultipleChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4801728B965B300D3BE1A /* KeyboardMultipleChoice.swift */; };
 		42E4801928B965B300D3BE1A /* KeyboardMultipleChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4801728B965B300D3BE1A /* KeyboardMultipleChoice.swift */; };
+		42E4801E28BFC6A900D3BE1A /* ProblemViewMultipleChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4801D28BFC6A900D3BE1A /* ProblemViewMultipleChoice.swift */; };
+		42E4801F28BFC6A900D3BE1A /* ProblemViewMultipleChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4801D28BFC6A900D3BE1A /* ProblemViewMultipleChoice.swift */; };
+		42E4802128BFC90700D3BE1A /* ProblemViewFreeform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4802028BFC90700D3BE1A /* ProblemViewFreeform.swift */; };
+		42E4802228BFC90700D3BE1A /* ProblemViewFreeform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4802028BFC90700D3BE1A /* ProblemViewFreeform.swift */; };
+		42E4802428C0136B00D3BE1A /* FormulaVertical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4802328C0136B00D3BE1A /* FormulaVertical.swift */; };
+		42E4802528C0136B00D3BE1A /* FormulaVertical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4802328C0136B00D3BE1A /* FormulaVertical.swift */; };
+		42E4802728C014A800D3BE1A /* FormulaHorizontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4802628C014A800D3BE1A /* FormulaHorizontal.swift */; };
+		42E4802828C014A800D3BE1A /* FormulaHorizontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4802628C014A800D3BE1A /* FormulaHorizontal.swift */; };
+		42E4802A28C15BA700D3BE1A /* make_curriculum.py in Resources */ = {isa = PBXBuildFile; fileRef = 42E4802928C15BA700D3BE1A /* make_curriculum.py */; };
+		42E4803028C17ADF00D3BE1A /* MenuRowsChapters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4802F28C17ADF00D3BE1A /* MenuRowsChapters.swift */; };
+		42E4803128C17ADF00D3BE1A /* MenuRowsChapters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4802F28C17ADF00D3BE1A /* MenuRowsChapters.swift */; };
+		42E4803328C17BC500D3BE1A /* MenuRowsSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4803228C17BC500D3BE1A /* MenuRowsSections.swift */; };
+		42E4803428C17BC500D3BE1A /* MenuRowsSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4803228C17BC500D3BE1A /* MenuRowsSections.swift */; };
+		42E4803628C17CB300D3BE1A /* MenuRowsProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4803528C17CB300D3BE1A /* MenuRowsProblems.swift */; };
+		42E4803728C17CB300D3BE1A /* MenuRowsProblems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4803528C17CB300D3BE1A /* MenuRowsProblems.swift */; };
+		42E4803928C181ED00D3BE1A /* MenuRowsTopLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4803828C181ED00D3BE1A /* MenuRowsTopLevel.swift */; };
+		42E4803A28C181ED00D3BE1A /* MenuRowsTopLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4803828C181ED00D3BE1A /* MenuRowsTopLevel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +104,15 @@
 		42E4801128B54F9600D3BE1A /* ProblemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemView.swift; sourceTree = "<group>"; };
 		42E4801428B960D200D3BE1A /* KeyboardIntegers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardIntegers.swift; sourceTree = "<group>"; };
 		42E4801728B965B300D3BE1A /* KeyboardMultipleChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardMultipleChoice.swift; sourceTree = "<group>"; };
+		42E4801D28BFC6A900D3BE1A /* ProblemViewMultipleChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemViewMultipleChoice.swift; sourceTree = "<group>"; };
+		42E4802028BFC90700D3BE1A /* ProblemViewFreeform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemViewFreeform.swift; sourceTree = "<group>"; };
+		42E4802328C0136B00D3BE1A /* FormulaVertical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaVertical.swift; sourceTree = "<group>"; };
+		42E4802628C014A800D3BE1A /* FormulaHorizontal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaHorizontal.swift; sourceTree = "<group>"; };
+		42E4802928C15BA700D3BE1A /* make_curriculum.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = make_curriculum.py; sourceTree = "<group>"; };
+		42E4802F28C17ADF00D3BE1A /* MenuRowsChapters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRowsChapters.swift; sourceTree = "<group>"; };
+		42E4803228C17BC500D3BE1A /* MenuRowsSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRowsSections.swift; sourceTree = "<group>"; };
+		42E4803528C17CB300D3BE1A /* MenuRowsProblems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRowsProblems.swift; sourceTree = "<group>"; };
+		42E4803828C181ED00D3BE1A /* MenuRowsTopLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRowsTopLevel.swift; sourceTree = "<group>"; };
 		A4800FB01CC139A6FAA3297F /* Pods_AlgebraMathMage__iOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlgebraMathMage__iOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD0B1EA5D2F388B7486EA25F /* Pods_AlgebraMathMage__macOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlgebraMathMage__macOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -138,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				4294A2A728AED707008BD756 /* README.md */,
+				42E4802928C15BA700D3BE1A /* make_curriculum.py */,
 				4294A28A28AC15AE008BD756 /* Launch Screen.storyboard */,
 				421FF85728A9E7C6000AB2FC /* Shared */,
 				421FF86628A9E7C9000AB2FC /* macOS */,
@@ -153,12 +180,20 @@
 			children = (
 				421FF85828A9E7C6000AB2FC /* AlgebraMathMageApp.swift */,
 				4294A28E28AC1D6C008BD756 /* API.swift */,
-				421FF85928A9E7C6000AB2FC /* MainView.swift */,
-				422A948F28AEEAF200094E6F /* MenuView.swift */,
+				42E4802628C014A800D3BE1A /* FormulaHorizontal.swift */,
+				42E4802328C0136B00D3BE1A /* FormulaVertical.swift */,
 				42E4801428B960D200D3BE1A /* KeyboardIntegers.swift */,
 				42E4801728B965B300D3BE1A /* KeyboardMultipleChoice.swift */,
+				421FF85928A9E7C6000AB2FC /* MainView.swift */,
+				42E4802F28C17ADF00D3BE1A /* MenuRowsChapters.swift */,
+				42E4803528C17CB300D3BE1A /* MenuRowsProblems.swift */,
+				42E4803228C17BC500D3BE1A /* MenuRowsSections.swift */,
+				42E4803828C181ED00D3BE1A /* MenuRowsTopLevel.swift */,
+				422A948F28AEEAF200094E6F /* MenuView.swift */,
 				42E4800E28AFFE8C00D3BE1A /* ProblemNavigator.swift */,
 				42E4801128B54F9600D3BE1A /* ProblemView.swift */,
+				42E4802028BFC90700D3BE1A /* ProblemViewFreeform.swift */,
+				42E4801D28BFC6A900D3BE1A /* ProblemViewMultipleChoice.swift */,
 				422A948C28AEE9AE00094E6F /* SectionCompletionView.swift */,
 				4294A29528AC265B008BD756 /* Strings.swift */,
 				4294A29228AC2576008BD756 /* Style.swift */,
@@ -340,6 +375,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4294A28D28AC1C1C008BD756 /* curriculum.json in Resources */,
+				42E4802A28C15BA700D3BE1A /* make_curriculum.py in Resources */,
 				4294A28B28AC15AE008BD756 /* Launch Screen.storyboard in Resources */,
 				421FF88428A9E7C9000AB2FC /* Assets.xcassets in Resources */,
 			);
@@ -375,17 +411,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42E4803628C17CB300D3BE1A /* MenuRowsProblems.swift in Sources */,
 				42E4801528B960D200D3BE1A /* KeyboardIntegers.swift in Sources */,
 				421FF88228A9E7C9000AB2FC /* MainView.swift in Sources */,
+				42E4802728C014A800D3BE1A /* FormulaHorizontal.swift in Sources */,
 				422A949028AEEAF200094E6F /* MenuView.swift in Sources */,
+				42E4802428C0136B00D3BE1A /* FormulaVertical.swift in Sources */,
 				42E4801828B965B300D3BE1A /* KeyboardMultipleChoice.swift in Sources */,
+				42E4803028C17ADF00D3BE1A /* MenuRowsChapters.swift in Sources */,
 				4294A28F28AC1D6C008BD756 /* API.swift in Sources */,
 				422A948D28AEE9AE00094E6F /* SectionCompletionView.swift in Sources */,
+				42E4803328C17BC500D3BE1A /* MenuRowsSections.swift in Sources */,
 				42E4801228B54F9600D3BE1A /* ProblemView.swift in Sources */,
+				42E4803928C181ED00D3BE1A /* MenuRowsTopLevel.swift in Sources */,
 				4294A29628AC265B008BD756 /* Strings.swift in Sources */,
 				421FF88028A9E7C9000AB2FC /* AlgebraMathMageApp.swift in Sources */,
 				42E4800F28AFFE8C00D3BE1A /* ProblemNavigator.swift in Sources */,
+				42E4801E28BFC6A900D3BE1A /* ProblemViewMultipleChoice.swift in Sources */,
 				4294A29328AC2576008BD756 /* Style.swift in Sources */,
+				42E4802128BFC90700D3BE1A /* ProblemViewFreeform.swift in Sources */,
 				4294A2A228AD669E008BD756 /* Toast.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,17 +438,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42E4803728C17CB300D3BE1A /* MenuRowsProblems.swift in Sources */,
 				42E4801628B960D200D3BE1A /* KeyboardIntegers.swift in Sources */,
 				421FF88328A9E7C9000AB2FC /* MainView.swift in Sources */,
+				42E4802828C014A800D3BE1A /* FormulaHorizontal.swift in Sources */,
 				422A949128AEEAF200094E6F /* MenuView.swift in Sources */,
+				42E4802528C0136B00D3BE1A /* FormulaVertical.swift in Sources */,
 				42E4801928B965B300D3BE1A /* KeyboardMultipleChoice.swift in Sources */,
+				42E4803128C17ADF00D3BE1A /* MenuRowsChapters.swift in Sources */,
 				4294A29028AC1F17008BD756 /* API.swift in Sources */,
 				422A948E28AEE9AE00094E6F /* SectionCompletionView.swift in Sources */,
+				42E4803428C17BC500D3BE1A /* MenuRowsSections.swift in Sources */,
 				42E4801328B54F9600D3BE1A /* ProblemView.swift in Sources */,
+				42E4803A28C181ED00D3BE1A /* MenuRowsTopLevel.swift in Sources */,
 				4294A29728AC265B008BD756 /* Strings.swift in Sources */,
 				421FF88128A9E7C9000AB2FC /* AlgebraMathMageApp.swift in Sources */,
 				42E4801028AFFE8C00D3BE1A /* ProblemNavigator.swift in Sources */,
+				42E4801F28BFC6A900D3BE1A /* ProblemViewMultipleChoice.swift in Sources */,
 				4294A29428AC2576008BD756 /* Style.swift in Sources */,
+				42E4802228BFC90700D3BE1A /* ProblemViewFreeform.swift in Sources */,
 				4294A2A328AD669E008BD756 /* Toast.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

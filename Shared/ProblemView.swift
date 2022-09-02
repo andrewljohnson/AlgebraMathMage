@@ -14,57 +14,21 @@ struct ProblemView: View {
   // todo: ?
   let problemNavigator:ProblemNavigator
   @State var answerString = ""
+  @State var correctAnswerSubmitted = false
   
   var body: some View {
-    if let sections = API.loadCurriculum() {
+    if let curriculum = API.loadCurriculum() {
+      let chapters = curriculum.chapters
+      let sections = chapters[problemNavigator.chapterIndex].sections
       let section = sections[problemNavigator.sectionIndex]
-      let problems = section.problems
+      let problems = API.problemsForIDs(problemIDs: section.problemIDs)
       let problem = problems[problemNavigator.problemIndex]
-      let textPrompt = problem.prompt
-      let textFormula =  problem.formula
       let textHint = problem.hint
-      let buttonTitles:[String] = problem.buttonTitles ?? []
       VStack {
-        Spacer()
-        Text(textPrompt)
-          .padding()
-          .font(.largeTitle)
-          .transition(.scale)
-          .id(textPrompt)
         if (problem.type == APIKeys.multipleChoice) {
-          Text(textFormula)
-            .padding()
-            .font(.title)
-            .padding([.bottom], Style.paddingBelowPrompt)
-            .transition(.scale)
-            .id(textFormula)
+          ProblemViewMultipleChoice(problemNavigator: problemNavigator, answerString: $answerString, correctAnswerSubmitted: $correctAnswerSubmitted)
         } else {
-          HStack {
-            Text(textFormula)
-              .padding()
-              .font(.title)
-              .transition(.scale)
-              .id(textFormula)
-            Text(answerString)
-              .fontWeight(.bold)
-              .padding()
-              .font(.title)
-              .transition(.scale)
-              .overlay(
-                Rectangle()
-                  .stroke(Style.colorMain, lineWidth: Style.inputStrokeWidth)
-              )
-              .id("number_answer")
-          }
-          .padding([.bottom], Style.paddingBelowPrompt)
-
-        }
-        HStack {
-          if (problem.type == APIKeys.multipleChoice) {
-            KeyboardMultipleChoice(buttonTitles:buttonTitles, problemNavigator:problemNavigator)
-          } else {
-            KeyboardIntegers(answerString: $answerString, problemNavigator: problemNavigator)
-          }
+          ProblemViewFreeform(problemNavigator: problemNavigator, answerString: $answerString, correctAnswerSubmitted: $correctAnswerSubmitted)
         }
         if (problemNavigator.showHint) {
           HStack { Text("\(Strings.hint.capitalized): "); Text(textHint) }

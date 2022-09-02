@@ -10,21 +10,28 @@ import SwiftUI
 
 struct MainView: View {
   
-  @State var problemIndex = API.getLastQuestion()[APIKeys.sectionIndex] ?? 0
-  @State var sectionIndex = API.getLastQuestion()[APIKeys.problemIndex] ?? 0
+  @State var problemIndex = API.getLastQuestion()[APIKeys.problemIndex] ?? 0
+  @State var sectionIndex = API.getLastQuestion()[APIKeys.sectionIndex] ?? 0
+  @State var chapterIndex = API.getLastQuestion()[APIKeys.chapterIndex] ?? 0
   @State var showSectionCompletion = false
-  
+  @State var showChapterCompletion = false
+
   let animationDuration = 0.3
   
   var body: some View {
         ZStack(alignment: .leading) {
-          if (self.showSectionCompletion) {
+          if (self.showChapterCompletion) {
+            //SectionCompletionView(showSectionCompletion: $showSectionCompletion)
+            //  .transition(.scale)
+          } else if (self.showSectionCompletion) {
             SectionCompletionView(showSectionCompletion: $showSectionCompletion)
               .transition(.scale)
           } else {
             ProblemNavigator(problemIndex:$problemIndex,
                              sectionIndex:$sectionIndex,
-                             showSectionCompletion:$showSectionCompletion)
+                             chapterIndex: $chapterIndex,
+                             showSectionCompletion:$showSectionCompletion,
+                             showChapterCompletion:$showChapterCompletion)
               .transition(AnyTransition.scale.animation(.easeInOut(duration: animationDuration)))
         }
       }
