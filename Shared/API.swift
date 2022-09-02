@@ -120,7 +120,19 @@ class API {
     return []
   }
 
-  
+  static func titleForProblem(problem:Problem) -> String {
+    if problem.prompt != nil {
+      return problem.prompt!
+    }
+    if problem.formula != nil {
+      return problem.formula!
+    }
+    if problem.formulaOperation == "multiplication", let numbers = problem.formulaNumbers {
+      return "\(numbers[0]) x \(numbers[1])"
+    }
+    // should never get here
+    return ""
+  }
   
   static func answerArrayToData(answerArray: [AnswerRecord]) -> Data? {
     let encoder = JSONEncoder()

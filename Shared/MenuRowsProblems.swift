@@ -36,7 +36,7 @@ struct MenuRowsProblems: View {
           }
         )
           {
-            Text(sectionIndex == showMenuSection && problemNumber == problemIndex ? "\(problemNumber) -  \(problem.prompt ?? "") (\(Strings.currentProblem.capitalized)" : "\(problemNumber) - \(problem.prompt ?? "")")
+            Text(sectionIndex == showMenuSection && problemNumber == problemIndex ? "\(API.titleForProblem(problem:problem)) (\(Strings.currentProblem.capitalized)" : "\(API.titleForProblem(problem:problem))")
               .frame(alignment: .leading)
               .multilineTextAlignment(.leading)
           }

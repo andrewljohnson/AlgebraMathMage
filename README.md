@@ -3,8 +3,8 @@
 This is an app for iPad to teach kids math, egged on by lots of little videos.
 
 ## Todo 
- * script to generate multiplication curriculum
  * scorecard view
+ * bug: selecting problem in menu before hitting continue leads to weird state
  
 ### Todo Later/Maybe
  * Randomize answer order
