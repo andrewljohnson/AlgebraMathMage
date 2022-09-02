@@ -81,69 +81,35 @@ struct ProblemNavigator: View {
   var body: some View {
     VStack {
       if (self.showVideo) {
-          Button(action: withAnimation {{ showVideo = false }})
-          {
-            HStack { Image(systemName: "arrowshape.turn.up.backward.fill"); Text(Strings.done.capitalized) }
-              .foregroundColor(Style.colorMain)
-              .frame(maxWidth: .infinity, alignment: .leading)
-              .padding()
-          }
-          YouTubePlayerView(self.youTubePlayer)
-            .onAppear { youTubePlayer.configuration = .init(autoPlay: true) }
+        Button(action: withAnimation {{ showVideo = false }})
+        {
+          HStack { Image(systemName: "arrowshape.turn.up.backward.fill"); Text(Strings.done.capitalized) }
+            .foregroundColor(Style.colorMain)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding()
+        }
+        YouTubePlayerView(self.youTubePlayer)
+          .onAppear { youTubePlayer.configuration = .init(autoPlay: true) }
       } else {
-        if let curriculum = API.loadCurriculum() {
-          let chapters = curriculum.chapters
-          let chapter = chapters[chapterIndex]
-          let sections = chapter.sections
-          let section = sections[sectionIndex]
-          let problemIDs = section.problemIDs
-              GeometryReader { geometry in
-                ZStack {
-                  VStack {
-                    HStack {
-                      Image("dalle-icon")
-                      Text("\(Strings.chapter.capitalized) \(chapterIndex + 1) / \(chapters.count)")
-                        .padding([.trailing], Style.padding)
-                      Text("\(Strings.section.capitalized) \(sectionIndex + 1) / \(sections.count)")
-                        .padding([.trailing], Style.padding)
-                      Text("\(Strings.problem.capitalized) \(problemIndex + 1) / \(problemIDs.count)")
-                      Spacer()
-                      Button(action: { withAnimation { showMenu = !showMenu } })
-                      {
-                        Image(systemName: "person")
-                          .foregroundColor(.white)
-                          .imageScale(.large)
-                      }
-                    }
-                      .padding()
-                      .background(Style.colorMain)
-                    Button(action: withAnimation {{ showVideo = true }})
-                    {
-                      HStack {
-                        Image(systemName: "play")
-                        Text(Strings.playHelperVideo.capitalized)
-                      }
-                        .foregroundColor(Style.colorMain)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding()
-                    }
-                    ProblemView(problemNavigator: self)
-                }
-                  .frame(width: self.showMenu ? geometry.size.width/4*3: geometry.size.width, height: geometry.size.height)
-                  .toast(message: Strings.correctGoodJob, isShowing: $showToast, duration: Toast.short)
-              }
-              if self.showMenu {
-                MenuView(showMenu: $showMenu, chapterIndex: $chapterIndex, sectionIndex: $sectionIndex, problemIndex: $problemIndex)
-                    .background(.black)
-                    .frame(width: geometry.size.width/4, height: geometry.size.height)
-                    .offset(x: geometry.size.width/4*3)
-                    .transition(.move(edge: .trailing))
-              }
+        GeometryReader { geometry in
+          ZStack {
+            VStack {
+              ProblemNavigatorHeader(problemIndex: $problemIndex, sectionIndex: $sectionIndex, chapterIndex: $chapterIndex, showMenu: $showMenu, showVideo: $showVideo)
+              ProblemView(problemNavigator: self)
             }
+            .frame(width: self.showMenu ? geometry.size.width/4*3: geometry.size.width, height: geometry.size.height)
+            .toast(message: Strings.correctGoodJob, isShowing: $showToast, duration: Toast.short)
+          }
+          if self.showMenu {
+            MenuView(showMenu: $showMenu, chapterIndex: $chapterIndex, sectionIndex: $sectionIndex, problemIndex: $problemIndex)
+                .background(.black)
+                .frame(width: geometry.size.width/4, height: geometry.size.height)
+                .offset(x: geometry.size.width/4*3)
+                .transition(.move(edge: .trailing))
+          }
         }
       }
     }
   }
-
 }
 

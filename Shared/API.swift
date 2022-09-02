@@ -112,17 +112,15 @@ class API {
 
   static func problemsForIDs(problemIDs:[Int]) -> [Problem] {
     if let curriculum = API.loadCurriculum() {
-      var problems:[Problem] = []
-      for p in curriculum.problems {
-        if (problemIDs.contains(p.id)) {
-          problems.append(p)
-        }
+      return problemIDs.compactMap{ id in
+        curriculum.problems.filter { (problem) -> Bool in
+          problemIDs.contains(problem.id)}.filter{ $0.id == id }.first
       }
-      return problems
     }
     return []
   }
 
+  
   
   static func answerArrayToData(answerArray: [AnswerRecord]) -> Data? {
     let encoder = JSONEncoder()
