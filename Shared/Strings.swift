@@ -12,6 +12,7 @@ struct Strings {
   static let chapter = "chapter"
   static let chapterCompleteCongratulations = "You completed a chapter, great job!"
   static let clearData = "clear data"
+  static let comeBackToThisOne = "Let's come back to this one."
   static let continueWord = "continue"
   static let continueToNextChapter = "Continue to Next Chapter"
   static let continueToNextSection = "Continue to Next Section"
@@ -28,4 +29,5 @@ struct Strings {
   static let sectionCompleteAdmonishment = "You failed this pair of sections, let's give it another try."
   static let sectionCompleteCongratulations = "You completed a section, great job!"
   static let submit = "submit"
+  static let tryAgain = "That's not right, give it anither try."
 }

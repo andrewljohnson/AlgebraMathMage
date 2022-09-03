@@ -13,7 +13,7 @@ struct ProblemView: View {
   // otherwise I'd just bind some variables
   // todo: ?
   let problemNavigator:ProblemNavigator
-  @State var answerString = ""
+  @Binding var answerString:String
   @State var correctAnswerSubmitted = false
   
   var body: some View {

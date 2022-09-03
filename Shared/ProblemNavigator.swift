@@ -10,6 +10,7 @@ import YouTubePlayerKit
 
 struct ProblemNavigator: View {
   
+  @State var answerString = ""
   @Binding var problemIndex:Int;
   @Binding var sectionIndex:Int;
   @Binding var chapterIndex:Int;
@@ -19,8 +20,14 @@ struct ProblemNavigator: View {
   @State var showLast = false
   @State var showHint = false
   @State var showMenu = false
+  @State private var showToastFailed = false
+  @State private var showToastFailedTwice = false
   @State private var showToast = false
   @State private var showVideo = false
+
+  @State private var problemFailureCount = 0
+
+  
   // rick roll
   let youTubePlayer: YouTubePlayer = "https://youtube.com/watch?v=dQw4w9WgXcQ"
   
@@ -32,14 +39,24 @@ struct ProblemNavigator: View {
       let problem = problems[problemIndex]
       let correctAnswer = problem.answer
       API.saveUserAnswer(problemID: problem.id, sectionID: section.id, chapterID: chapter.id, answerGiven: answer)
-      if (problemIndex < problems.count && answer == correctAnswer) {
+      if problemIndex < problems.count && answer == correctAnswer {
         showToast = true
       }
-      if (answer == correctAnswer) {
-        if (gotoNext) {
+      if answer != correctAnswer {
+        problemFailureCount += 1
+        if problemFailureCount == 1 {
+          showToastFailed = true
+        } else if problemFailureCount == 2 {
+          showToastFailedTwice = true
+        }
+      }
+      
+      if answer == correctAnswer || problemFailureCount == 2 {
+        if (gotoNext || problemFailureCount == 2) {
           gotoNextProblem()
         }
         showHint = false
+        problemFailureCount = 0
       } else {
         showHint = true
       }
@@ -50,6 +67,7 @@ struct ProblemNavigator: View {
   }
 
   func gotoNextProblem() {
+    answerString = ""
     if let curriculum = API.loadCurriculum() {
       let chapters = curriculum.chapters
       let sections = chapters[chapterIndex].sections
@@ -79,7 +97,8 @@ struct ProblemNavigator: View {
           sectionIndex = 0
         }
       } else {
-        showLast = true
+        // show last problem answer only on in order sections
+        showLast = sectionIndex % 2 == 0
       }
     }
     API.saveLastQuestion(chapterIndex: chapterIndex, sectionIndex: sectionIndex, problemIndex: problemIndex)
@@ -102,10 +121,12 @@ struct ProblemNavigator: View {
           ZStack {
             VStack {
               ProblemNavigatorHeader(problemIndex: $problemIndex, sectionIndex: $sectionIndex, chapterIndex: $chapterIndex, showMenu: $showMenu, showVideo: $showVideo)
-              ProblemView(problemNavigator: self)
+              ProblemView(problemNavigator: self, answerString: $answerString)
             }
             .frame(width: self.showMenu ? geometry.size.width/4*3: geometry.size.width, height: geometry.size.height)
             .toast(message: Strings.correctGoodJob, isShowing: $showToast, duration: Toast.short)
+            .toast(message: Strings.tryAgain, isShowing: $showToastFailed, duration: Toast.short)
+            .toast(message: Strings.comeBackToThisOne, isShowing: $showToastFailedTwice, duration: Toast.short)
           }
           if self.showMenu {
             MenuView(showMenu: $showMenu, chapterIndex: $chapterIndex, sectionIndex: $sectionIndex, problemIndex: $problemIndex)

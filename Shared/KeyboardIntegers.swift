@@ -63,7 +63,6 @@ struct KeyboardIntegers: View {
         if (correctAnswerSubmitted) {
           Button(action:
                   { withAnimation {
-                    answerString = ""
                     correctAnswerSubmitted = false
                     problemNavigator.gotoNextProblem()
                   }}
