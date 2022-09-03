@@ -13,6 +13,7 @@ struct ProblemNavigator: View {
   @Binding var problemIndex:Int;
   @Binding var sectionIndex:Int;
   @Binding var chapterIndex:Int;
+  @Binding var showSectionFailure:Bool;
   @Binding var showSectionCompletion:Bool;
   @Binding var showChapterCompletion:Bool;
   @State var showLast = false
@@ -31,7 +32,6 @@ struct ProblemNavigator: View {
       let problem = problems[problemIndex]
       let correctAnswer = problem.answer
       API.saveUserAnswer(problemID: problem.id, sectionID: section.id, chapterID: chapter.id, answerGiven: answer)
-      API.printKeychain()
       if (problemIndex < problems.count && answer == correctAnswer) {
         showToast = true
       }
@@ -58,6 +58,13 @@ struct ProblemNavigator: View {
       if (problemIndex >= problemIDs.count) {
         showLast = false
         problemIndex = 0
+        if sectionIndex >= 1 && sectionIndex % 2 != 0 {
+          if !API.sectionPairIsMastered(chapterID: chapterIndex, sectionIDInOrder: sections[sectionIndex-1].id, sectionIDRandom: sections[sectionIndex].id) {
+            sectionIndex -= 1
+            showSectionFailure = true
+            return
+          }
+        }
         sectionIndex += 1
         showSectionCompletion = true
         if (sectionIndex >= sections.count) {

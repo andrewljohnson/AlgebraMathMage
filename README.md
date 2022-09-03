@@ -9,6 +9,7 @@ This is an app for iPad to teach kids math, egged on by lots of little videos.
   * check for mastery before going to next set of 2 sections (and don't go on if they just switch to the last problem)
  * bug: selecting problem in menu before hitting continue leads to weird state
  * animation between scetion and chapter complete
+ * don't show previous problem grayed out when doing random order questions
  
 ### Todo Later/Maybe
  * Bugs

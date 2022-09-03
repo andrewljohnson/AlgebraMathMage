@@ -8,6 +8,7 @@
 import Foundation
 import KeychainSwift
 import Security
+import SwiftUI
 
 struct APIKeys {
   static let chapterIndex = "chapterIndex"
@@ -89,6 +90,61 @@ class API {
     return nil
   }
   
+  static func sectionPairIsMastered(chapterID:Int, sectionIDInOrder:Int, sectionIDRandom:Int) -> Bool {
+    if let curriculum = API.loadCurriculum() {
+      if let chapter = curriculum.chapters.first(where: {$0.id == chapterID}),
+         let sectionInOrder = chapter.sections.first(where: {$0.id == sectionIDInOrder}),
+         let sectionRandom = chapter.sections.first(where: {$0.id == sectionIDRandom}) {
+  
+        let keychain = KeychainSwift()
+        if let username = keychain.get(APIKeys.username) {
+          let answersLookupKey = "\(username)\(APIKeys.userAnswersLookupSuffix)"
+          var records:[AnswerRecord] = []
+          if let dataAnswers = keychain.getData(answersLookupKey) {
+            records = API.dataToAnswerArray(data:dataAnswers) ?? []
+          }
+          print("Section In Order Answers\n")
+          let inOrderMastered = API.sectionIsMastered(curriculum: curriculum, chapterID: chapterID, section: sectionInOrder, records: records)
+          print("\n\nSection Random Answers\n")
+          let randomMastered = API.sectionIsMastered(curriculum: curriculum, chapterID: chapterID, section: sectionRandom, records: records)
+          return inOrderMastered && randomMastered
+        }
+      }
+    }
+    return false
+  }
+
+  static func sectionIsMastered(curriculum:Curriculum, chapterID:Int, section:Section, records:[AnswerRecord]) -> Bool {
+    var answerMap = Dictionary(uniqueKeysWithValues: section.problemIDs.map{ ($0, false) })
+    for record in records {
+      if (record.chapterID == chapterID && record.sectionID == section.id) {
+        if answerMap[record.problemID] != nil {
+          if API.answerRecordHasCorrectAnswer(record: record, problem: curriculum.problems.first(where: {$0.id == record.problemID})) {
+            answerMap[record.problemID] = true
+          }
+        }
+      }
+    }
+    print("\(answerMap as AnyObject)")
+    for (_, isCorrect) in answerMap {
+      if !isCorrect {
+        return false
+      }
+    }
+    return true
+  }
+
+  static func answerRecordHasCorrectAnswer(record:AnswerRecord, problem:Problem?) -> Bool {
+    if problem != nil {
+      for answer in record.answers {
+        if answer == problem?.answer {
+          return true
+        }
+      }
+    }
+    return false
+  }
+  
   static func problemForIndices(chapterIndex:Int, sectionIndex:Int, problemIndex:Int) -> Problem? {
     if let curriculum = API.loadCurriculum() {
       let chapter = curriculum.chapters[chapterIndex]
@@ -150,7 +206,6 @@ class API {
     return nil
   }
 
-  
   // answerGiven is either a numeric answer or the index of a multiple choice answer
   static func saveUserAnswer(problemID:Int, sectionID: Int, chapterID: Int, answerGiven:Int) {
     let keychain = KeychainSwift()

@@ -48,6 +48,7 @@ struct ProblemNavigatorHeader: View {
               }
                 .padding()
                 .background(Style.colorMain)
+                .foregroundColor(.white)
               Button(action: withAnimation {{ showVideo = true }})
               {
                 HStack {

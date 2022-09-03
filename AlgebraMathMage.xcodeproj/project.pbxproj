@@ -63,6 +63,8 @@
 		42E4803D28C23E5100D3BE1A /* CompletionViewChapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4803B28C23E5100D3BE1A /* CompletionViewChapter.swift */; };
 		42E4803F28C2582100D3BE1A /* ProblemNavigatorHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4803E28C2582100D3BE1A /* ProblemNavigatorHeader.swift */; };
 		42E4804028C2582100D3BE1A /* ProblemNavigatorHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4803E28C2582100D3BE1A /* ProblemNavigatorHeader.swift */; };
+		42E4804228C3949600D3BE1A /* FailureViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4804128C3949600D3BE1A /* FailureViewSection.swift */; };
+		42E4804328C3949600D3BE1A /* FailureViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E4804128C3949600D3BE1A /* FailureViewSection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +121,7 @@
 		42E4803828C181ED00D3BE1A /* MenuRowsTopLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRowsTopLevel.swift; sourceTree = "<group>"; };
 		42E4803B28C23E5100D3BE1A /* CompletionViewChapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionViewChapter.swift; sourceTree = "<group>"; };
 		42E4803E28C2582100D3BE1A /* ProblemNavigatorHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemNavigatorHeader.swift; sourceTree = "<group>"; };
+		42E4804128C3949600D3BE1A /* FailureViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailureViewSection.swift; sourceTree = "<group>"; };
 		A4800FB01CC139A6FAA3297F /* Pods_AlgebraMathMage__iOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlgebraMathMage__iOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD0B1EA5D2F388B7486EA25F /* Pods_AlgebraMathMage__macOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlgebraMathMage__macOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -188,6 +191,7 @@
 				4294A28E28AC1D6C008BD756 /* API.swift */,
 				42E4803B28C23E5100D3BE1A /* CompletionViewChapter.swift */,
 				422A948C28AEE9AE00094E6F /* CompletionViewSection.swift */,
+				42E4804128C3949600D3BE1A /* FailureViewSection.swift */,
 				42E4802628C014A800D3BE1A /* FormulaHorizontal.swift */,
 				42E4802328C0136B00D3BE1A /* FormulaVertical.swift */,
 				42E4801428B960D200D3BE1A /* KeyboardIntegers.swift */,
@@ -433,6 +437,7 @@
 				42E4803328C17BC500D3BE1A /* MenuRowsSections.swift in Sources */,
 				42E4801228B54F9600D3BE1A /* ProblemView.swift in Sources */,
 				42E4803928C181ED00D3BE1A /* MenuRowsTopLevel.swift in Sources */,
+				42E4804228C3949600D3BE1A /* FailureViewSection.swift in Sources */,
 				42E4803F28C2582100D3BE1A /* ProblemNavigatorHeader.swift in Sources */,
 				4294A29628AC265B008BD756 /* Strings.swift in Sources */,
 				421FF88028A9E7C9000AB2FC /* AlgebraMathMageApp.swift in Sources */,
@@ -462,6 +467,7 @@
 				42E4803428C17BC500D3BE1A /* MenuRowsSections.swift in Sources */,
 				42E4801328B54F9600D3BE1A /* ProblemView.swift in Sources */,
 				42E4803A28C181ED00D3BE1A /* MenuRowsTopLevel.swift in Sources */,
+				42E4804328C3949600D3BE1A /* FailureViewSection.swift in Sources */,
 				42E4804028C2582100D3BE1A /* ProblemNavigatorHeader.swift in Sources */,
 				4294A29728AC265B008BD756 /* Strings.swift in Sources */,
 				421FF88128A9E7C9000AB2FC /* AlgebraMathMageApp.swift in Sources */,

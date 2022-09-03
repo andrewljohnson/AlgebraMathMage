@@ -14,27 +14,33 @@ struct MainView: View {
   @State var sectionIndex = API.getLastQuestion()[APIKeys.sectionIndex] ?? 0
   @State var chapterIndex = API.getLastQuestion()[APIKeys.chapterIndex] ?? 0
   @State var showSectionCompletion = false
+  @State var showSectionFailure = false
   @State var showChapterCompletion = false
 
   let animationDuration = 0.3
   
   var body: some View {
-        ZStack(alignment: .leading) {
-          if (self.showSectionCompletion) {
-            CompletionViewSection(showSectionCompletion: $showSectionCompletion)
+      ZStack(alignment: .leading) {
+        if (self.showSectionFailure) {
+          FailureViewSection(showSectionFailure: $showSectionFailure)
+          .transition(.scale)
+        } else if (self.showSectionCompletion) {
+          CompletionViewSection(showSectionCompletion: $showSectionCompletion)
+          .transition(.scale)
+        } else if (self.showChapterCompletion) {
+          CompletionViewChapter(showChapterCompletion: $showChapterCompletion)
             .transition(.scale)
-          } else if (self.showChapterCompletion) {
-            CompletionViewChapter(showChapterCompletion: $showChapterCompletion)
-              .transition(.scale)
-          } else {
-            ProblemNavigator(problemIndex:$problemIndex,
-                             sectionIndex:$sectionIndex,
-                             chapterIndex: $chapterIndex,
-                             showSectionCompletion:$showSectionCompletion,
-                             showChapterCompletion:$showChapterCompletion)
-              .transition(AnyTransition.scale.animation(.easeInOut(duration: animationDuration)))
-        }
+        } else {
+          ProblemNavigator(problemIndex:$problemIndex,
+                           sectionIndex:$sectionIndex,
+                           chapterIndex: $chapterIndex,
+                           showSectionFailure:$showSectionFailure,
+                           showSectionCompletion:$showSectionCompletion,
+                           showChapterCompletion:$showChapterCompletion)
+            .transition(AnyTransition.scale.animation(.easeInOut(duration: animationDuration)))
       }
+    }
+      .onAppear(perform: API.printKeychain)
   }
 }
 

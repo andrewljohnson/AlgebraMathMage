@@ -23,7 +23,9 @@ struct Strings {
   static let playHelperVideo = "play helper video"
   static let problem = "problem"
   static let problems = "problems"
+  static let redoSection = "redo sections"
   static let section = "section"
+  static let sectionCompleteAdmonishment = "You failed this pair of sections, let's give it another try."
   static let sectionCompleteCongratulations = "You completed a section, great job!"
   static let submit = "submit"
 }
