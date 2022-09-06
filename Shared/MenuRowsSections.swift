@@ -9,20 +9,18 @@ import SwiftUI
 
 struct MenuRowsSections: View {
   
-  @Binding var showMenuChapter:Int
-  @Binding var showMenuSection:Int
-  @Binding var sectionIndex:Int
+  @Binding var showMenuSection:Section?
   @Binding var showMenuChapterList:Bool
+  let showMenuChapter:Chapter
 
   var body: some View {
-    if let curriculum = API.loadCurriculum() {
-      let chapter = curriculum.chapters[showMenuChapter]
-      ForEach(Array(chapter.sections.enumerated()), id: \.element) {
-        sectionNumber, section in
+    if let chapter = showMenuChapter {
+      ForEach(chapter.sections, id: \.self) {
+        section in
         Button(action:
           {
             withAnimation {
-              showMenuSection = sectionNumber
+              showMenuSection = section
               showMenuChapterList = false
             }
           }

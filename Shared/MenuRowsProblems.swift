@@ -9,41 +9,33 @@ import SwiftUI
 
 struct MenuRowsProblems: View {
   
-  @Binding var showMenuChapter:Int
-  @Binding var showMenuSection:Int
-  @Binding var chapterIndex:Int
-  @Binding var sectionIndex:Int
-  @Binding var problemIndex:Int
+  @Binding var index:CurriculumIndex
   @Binding var showMenu:Bool
+  let showMenuChapter:Chapter
+  let showMenuSection:Section
 
   var body: some View {
-    if let curriculum = API.loadCurriculum() {
-      let chapter = curriculum.chapters[showMenuChapter]
-      let section = chapter.sections[showMenuSection]
-      Text("\(Strings.section.capitalized) \(showMenuSection)")
+    Text("\(showMenuSection.sectionTitle)")
+      .frame(maxWidth: .infinity, alignment: .leading)
+      .font(.title)
+    ForEach(API.problemsForIDs(problemIDs: showMenuSection.problemIDs), id: \.self) {
+      problem in
+      Button(action:
+        {
+          withAnimation {
+            index = CurriculumIndex(chapterID: showMenuChapter.id, sectionID: showMenuSection.id, problemID: problem.id)
+            showMenu = false
+          }
+        }
+      )
+        {
+          Text(index.sectionID == showMenuSection.id && problem.id == index.problemID ? "\(API.titleForProblem(problem:problem)) (\(Strings.currentProblem.capitalized)" : "\(API.titleForProblem(problem:problem))")
+            .frame(alignment: .leading)
+            .multilineTextAlignment(.leading)
+        }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .font(.title)
-      ForEach(Array(API.problemsForIDs(problemIDs: section.problemIDs).enumerated()), id: \.element) {
-        problemNumber, problem in
-        Button(action:
-          {
-            withAnimation {
-              problemIndex = problemNumber
-              sectionIndex = showMenuSection
-              chapterIndex = showMenuChapter
-              showMenu = false
-            }
-          }
-        )
-          {
-            Text(sectionIndex == showMenuSection && problemNumber == problemIndex ? "\(API.titleForProblem(problem:problem)) (\(Strings.currentProblem.capitalized)" : "\(API.titleForProblem(problem:problem))")
-              .frame(alignment: .leading)
-              .multilineTextAlignment(.leading)
-          }
-          .frame(maxWidth: .infinity, alignment: .leading)
-          .padding()
-          .foregroundColor(sectionIndex == showMenuSection && problemNumber == problemIndex ? .green : .white)
-      }
+        .padding()
+        .foregroundColor(index.sectionID == showMenuSection.id && problem.id == index.problemID ? .green : .white)
     }
   }
 }

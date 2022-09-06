@@ -17,12 +17,7 @@ struct ProblemView: View {
   @State var correctAnswerSubmitted = false
   
   var body: some View {
-    if let curriculum = API.loadCurriculum() {
-      let chapters = curriculum.chapters
-      let sections = chapters[problemNavigator.chapterIndex].sections
-      let section = sections[problemNavigator.sectionIndex]
-      let problems = API.problemsForIDs(problemIDs: section.problemIDs)
-      let problem = problems[problemNavigator.problemIndex]
+    if let problem = API.problemForID(problemID: problemNavigator.index.problemID) {
       let textHint = problem.hint
       VStack {
         if (problem.type == APIKeys.multipleChoice) {

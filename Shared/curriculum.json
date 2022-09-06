@@ -7,6 +7,7 @@
         {
           "sectionTitle": "Multiplication by 2 (in order)",
           "id": 0,
+          "inOrder": true,
           "problemIDs": [
             0,
             1,
@@ -22,6 +23,7 @@
         {
           "sectionTitle": "Multiplication by 2 (random)",
           "id": 1,
+          "inOrder": false,
           "problemIDs": [
             7,
             3,
