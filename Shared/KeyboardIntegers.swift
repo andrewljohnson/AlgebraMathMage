@@ -55,7 +55,7 @@ struct KeyboardIntegers: View {
           Image(systemName: "delete.backward.fill")
             .resizable()
             .frame(width: Style.buttonSize, height: Style.buttonSize / 4*3)
-            .foregroundColor(answerString.count == 0 || correctAnswerSubmitted ? Style.colorDisabled : Style.colorDelete)
+            .foregroundColor(Style.colorDisabled)
             .id("delete")
         }
         .disabled(answerString.count == 0 || correctAnswerSubmitted)

@@ -9,10 +9,7 @@ import KeychainSwift
 import SwiftUI
 
 struct MainView: View {
-  
-  @State var problemIndex = API.getLastQuestion()[APIKeys.problemIndex] ?? 0
-  @State var sectionIndex = API.getLastQuestion()[APIKeys.sectionIndex] ?? 0
-  @State var chapterIndex = API.getLastQuestion()[APIKeys.chapterIndex] ?? 0
+  @State var problemIndex = API.getLastQuestion()
   @State var showSectionCompletion = false
   @State var showSectionFailure = false
   @State var showChapterCompletion = false
@@ -31,9 +28,7 @@ struct MainView: View {
           CompletionViewChapter(showChapterCompletion: $showChapterCompletion)
             .transition(.scale)
         } else {
-          ProblemNavigator(problemIndex:$problemIndex,
-                           sectionIndex:$sectionIndex,
-                           chapterIndex: $chapterIndex,
+          ProblemNavigator(index:$problemIndex,
                            showSectionFailure:$showSectionFailure,
                            showSectionCompletion:$showSectionCompletion,
                            showChapterCompletion:$showChapterCompletion)

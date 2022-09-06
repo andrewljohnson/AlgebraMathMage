@@ -17,7 +17,7 @@ struct ProblemViewMultipleChoice: View {
   @Binding var correctAnswerSubmitted:Bool
   
   var body: some View {
-    if let problem = API.problemForIndices(chapterIndex: problemNavigator.chapterIndex, sectionIndex: problemNavigator.sectionIndex, problemIndex: problemNavigator.problemIndex), let buttonTitles = problem.buttonTitles {
+    if let problem = API.problemForID(problemID: problemNavigator.index.problemID), let buttonTitles = problem.buttonTitles {
       let textPrompt = problem.prompt
       let textFormula =  problem.formula
       VStack {

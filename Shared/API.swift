@@ -13,9 +13,7 @@ import SwiftUI
 struct APIKeys {
   static let chapterIndex = "chapterIndex"
   static let multipleChoice = "multiple_choice"
-  static let lastChapterIndex = "lastChapterIndex"
-  static let lastSectionIndex = "lastSectionIndex"
-  static let lastProblemIndex = "lastProblemIndex"
+  static let currentProblem = "currentProblem"
   static let sectionIndex = "sectionIndex"
   static let problemIndex = "problemIndex"
   static let username = "username"
@@ -23,9 +21,6 @@ struct APIKeys {
 }
 
 struct Problem: Decodable, Hashable {
-  enum Category: Decodable {
-      case swift, combine, debugging, xcode
-  }
   let answer: Int?
   let buttonTitles: [String]?
   let formula: String?
@@ -39,40 +34,34 @@ struct Problem: Decodable, Hashable {
 }
 
 struct Section: Decodable, Hashable {
-  enum Category: Decodable {
-      case swift, combine, debugging, xcode
-  }
   let id: Int
+  let inOrder:Bool
   let sectionTitle: String
   let problemIDs: [Int]
 }
 
 struct Chapter: Decodable, Hashable {
-  enum Category: Decodable {
-      case swift, combine, debugging, xcode
-  }
   let id: Int
   let chapterTitle: String
   let sections: [Section]
 }
 
 struct Curriculum: Decodable, Hashable {
-  enum Category: Decodable {
-      case swift, combine, debugging, xcode
-  }
   let chapters: [Chapter]
   let problems: [Problem]
 }
 
-struct AnswerRecord: Encodable, Decodable, Hashable {
-    enum Category: Decodable {
-        case swift, combine, debugging, xcode
-    }
+struct AnswerRecord: Codable, Hashable {
+  let index: CurriculumIndex
+  var answers: [Int]
+}
+
+struct CurriculumIndex: Codable, Hashable {
     let chapterID: Int
     let sectionID: Int
     let problemID: Int
-    var answers: [Int]
 }
+
 
 // todo: make this use a server
 class API {
@@ -117,10 +106,10 @@ class API {
   static func sectionIsMastered(curriculum:Curriculum, chapterID:Int, section:Section, records:[AnswerRecord]) -> Bool {
     var answerMap = Dictionary(uniqueKeysWithValues: section.problemIDs.map{ ($0, false) })
     for record in records {
-      if (record.chapterID == chapterID && record.sectionID == section.id) {
-        if answerMap[record.problemID] != nil {
-          if API.answerRecordHasCorrectAnswer(record: record, problem:  API.problemForID(problemID: record.problemID)) {
-            answerMap[record.problemID] = true
+      if (record.index.chapterID == chapterID && record.index.sectionID == section.id) {
+        if answerMap[record.index.problemID] != nil {
+          if API.answerRecordHasCorrectAnswer(record: record, problem: API.problemForID(problemID: record.index.problemID)) {
+            answerMap[record.index.problemID] = true
           }
         }
       }
@@ -176,6 +165,32 @@ class API {
     return []
   }
 
+  static func chapterForID(chapterID:Int) -> Chapter? {
+    if let curriculum = API.loadCurriculum() {
+      for c in curriculum.chapters {
+        if (c.id == chapterID) {
+          return c
+        }
+      }
+    }
+    return nil
+  }
+  
+  static func sectionForID(chapterID:Int, sectionID:Int) -> Section? {
+    if let curriculum = API.loadCurriculum() {
+      for c in curriculum.chapters {
+        if (c.id == chapterID) {
+          for s in c.sections {
+            if s.id == sectionID {
+              return s
+            }
+          }
+        }
+      }
+    }
+    return nil
+  }
+  
   static func titleForProblem(problem:Problem) -> String {
     if problem.prompt != nil {
       return problem.prompt!
@@ -207,7 +222,7 @@ class API {
   }
 
   // answerGiven is either a numeric answer or the index of a multiple choice answer
-  static func saveUserAnswer(problemID:Int, sectionID: Int, chapterID: Int, answerGiven:Int) {
+  static func saveUserAnswer(index: CurriculumIndex, answerGiven:Int) {
     let keychain = KeychainSwift()
     if keychain.get(APIKeys.username) == nil {
       // todo: set a random username from server
@@ -225,16 +240,16 @@ class API {
         if var answers = API.dataToAnswerArray(data:dataAnswers) {
           var found = false
           let newAnswers: [AnswerRecord] = answers.map { answer in
-            if (answer.chapterID == chapterID && answer.sectionID == sectionID && answer.problemID == problemID) {
+            if (answer.index.chapterID == index.chapterID && answer.index.sectionID == index.sectionID && answer.index.problemID == index.problemID) {
               var previousAnswers = answer.answers
               previousAnswers.append(answerGiven)
               found = true
-              return AnswerRecord(chapterID: answer.chapterID, sectionID: answer.sectionID, problemID: answer.problemID, answers: previousAnswers)
+              return AnswerRecord(index: index, answers: previousAnswers)
             }
             return answer
           }
           if (!found) {
-            let newAnswer:AnswerRecord = AnswerRecord(chapterID: chapterID, sectionID: sectionID, problemID: problemID, answers: [answerGiven])
+            let newAnswer:AnswerRecord = AnswerRecord(index: index, answers: [answerGiven])
             answers.append(newAnswer)
             if let data = API.answerArrayToData(answerArray:answers) {
               keychain.set(data, forKey: answersLookupKey)
@@ -249,19 +264,20 @@ class API {
     }
   }
 
-  static func saveLastQuestion(chapterIndex: Int, sectionIndex: Int, problemIndex: Int) {
+  static func saveCurrentQuestion(index: CurriculumIndex) {
     let keychain = KeychainSwift()
-    keychain.set("\(chapterIndex)", forKey: APIKeys.lastChapterIndex)
-    keychain.set("\(sectionIndex)", forKey: APIKeys.lastSectionIndex)
-    keychain.set("\(problemIndex)", forKey: APIKeys.lastProblemIndex)
+    if let encoded = try? JSONEncoder().encode(index) {
+      keychain.set(encoded, forKey: APIKeys.currentProblem)
+    }
   }
 
-  static func getLastQuestion() -> [String:Int] {
+  static func getLastQuestion() -> CurriculumIndex {
     let keychain = KeychainSwift()
-    if let chapterIndex = keychain.get(APIKeys.lastChapterIndex), let sectionIndex = keychain.get(APIKeys.lastSectionIndex), let problemIndex = keychain.get(APIKeys.lastProblemIndex) {
-      return [APIKeys.chapterIndex: Int(chapterIndex) ?? 0, APIKeys.sectionIndex: Int(sectionIndex) ?? 0, APIKeys.problemIndex: Int(problemIndex) ?? 0]
+    if let encoded = keychain.getData(APIKeys.currentProblem),
+      let index = try? JSONDecoder().decode(CurriculumIndex.self, from: encoded) {
+        return index
     }
-    return [APIKeys.chapterIndex: 0, APIKeys.sectionIndex: 0, APIKeys.problemIndex: 0]
+    return CurriculumIndex(chapterID: 0, sectionID: 0, problemID: 0)
   }
   
   static func printKeychain() {
@@ -272,7 +288,7 @@ class API {
       } else {
         if let data = keychain.getData(keykey), let answers = API.dataToAnswerArray(data: data) {
           for answer in answers {
-            print("chapterID: \(answer.chapterID), sectionID: \(answer.sectionID), problemID: \(answer.problemID), answers: \(answer.answers)")
+            print("chapterID: \(answer.index.chapterID), sectionID: \(answer.index.sectionID), problemID: \(answer.index.problemID), answers: \(answer.answers)")
           }
         }
       }
@@ -282,8 +298,9 @@ class API {
   static func clearKeychain() {
     let keychain = KeychainSwift()
     keychain.clear()
-    keychain.set("0", forKey: APIKeys.lastChapterIndex)
-    keychain.set("0", forKey: APIKeys.lastSectionIndex)
-    keychain.set("0", forKey: APIKeys.lastProblemIndex)
+    
+    if let curriculum = API.loadCurriculum(), let encoded = try? JSONEncoder().encode(CurriculumIndex(chapterID: curriculum.chapters[0].id, sectionID: curriculum.chapters[0].sections[0].id, problemID: curriculum.chapters[0].sections[0].problemIDs[0])) {
+      keychain.set(encoded, forKey: APIKeys.currentProblem)
+    }
   }
 }

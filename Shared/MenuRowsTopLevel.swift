@@ -9,11 +9,9 @@ import SwiftUI
 
 struct MenuRowsTopLevel: View {
   
+  @Binding var index:CurriculumIndex
   @Binding var showMenu:Bool
   @Binding var showMenuChapterList:Bool
-  @Binding var chapterIndex:Int
-  @Binding var sectionIndex:Int
-  @Binding var problemIndex:Int
 
   var body: some View {
     Button(action:
@@ -37,9 +35,7 @@ struct MenuRowsTopLevel: View {
       withAnimation {
         {
           API.clearKeychain()
-          sectionIndex = 0
-          problemIndex = 0
-          chapterIndex = 0
+          index = API.getLastQuestion()
           showMenu = false
         }
       }

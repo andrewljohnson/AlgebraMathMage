@@ -16,19 +16,17 @@ import SwiftUI
 
 struct ProblemNavigatorHeader: View {
   
-  @Binding var problemIndex:Int;
-  @Binding var sectionIndex:Int;
-  @Binding var chapterIndex:Int;
+  @Binding var index:CurriculumIndex;
   @Binding var showMenu:Bool;
   @Binding var showVideo:Bool;
 
   var body: some View {
-    if let curriculum = API.loadCurriculum() {
+    if let curriculum = API.loadCurriculum(), let chapter = API.chapterForID(chapterID: index.chapterID), let section = API.sectionForID(chapterID: index.chapterID, sectionID: index.sectionID) {
       let chapters = curriculum.chapters
-      let chapter = chapters[chapterIndex]
       let sections = chapter.sections
-      let section = sections[sectionIndex]
       let problemIDs = section.problemIDs
+      if let chapterIndex = chapters.firstIndex(of: chapter), let sectionIndex = sections.firstIndex(of: section), let problemIndex = section.problemIDs.firstIndex(of: index.problemID) {
+      
         GeometryReader { geometry in
             VStack {
               HStack {
@@ -59,6 +57,7 @@ struct ProblemNavigatorHeader: View {
                   .frame(maxWidth: .infinity, alignment: .leading)
                   .padding()
               }
+            }
           }
         }
       }
