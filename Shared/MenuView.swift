@@ -20,15 +20,15 @@ struct MenuView: View {
         if showMenuChapterList {
           MenuRowsChapters(showMenuChapter: $showMenuChapter,
                            showMenuChapterList: $showMenuChapterList)
-        } else if showMenuSection != nil {
+        } else if let chapter = showMenuChapter, let section = showMenuSection {
           MenuRowsProblems(index:$index,
                            showMenu:$showMenu,
-                           showMenuChapter: showMenuChapter!,  // todo? force unwrap
-                           showMenuSection: showMenuSection!)  // todo? force unwrap
-        } else if showMenuChapter != nil {
+                           showMenuChapter: chapter,
+                           showMenuSection: section)
+        } else if let chapter = showMenuChapter {
           MenuRowsSections(showMenuSection: $showMenuSection,
                            showMenuChapterList: $showMenuChapterList,
-                           showMenuChapter: showMenuChapter!)  // todo? force unwrap
+                           showMenuChapter: chapter)
         } else {
           MenuRowsTopLevel(index: $index,
                            showMenu: $showMenu,
