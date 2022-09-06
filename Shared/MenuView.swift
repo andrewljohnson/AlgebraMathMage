@@ -10,36 +10,29 @@ import SwiftUI
 struct MenuView: View {
 
   @Binding var showMenu:Bool
-  @Binding var chapterIndex:Int
-  @Binding var sectionIndex:Int
-  @Binding var problemIndex:Int
+  @Binding var index:CurriculumIndex
   @State private var showMenuChapterList = false
-  @State private var showMenuChapter = -1
-  @State private var showMenuSection = -1
+  @State private var showMenuChapter:Chapter? = nil
+  @State private var showMenuSection:Section? = nil
 
   var body: some View {
     VStack {
-        if (showMenuChapterList) {
+        if showMenuChapterList {
           MenuRowsChapters(showMenuChapter: $showMenuChapter,
                            showMenuChapterList: $showMenuChapterList)
-        } else if (showMenuSection > -1) {
-          MenuRowsProblems(showMenuChapter: $showMenuChapter,
-                           showMenuSection: $showMenuSection,
-                           chapterIndex: $chapterIndex,
-                           sectionIndex: $sectionIndex,
-                           problemIndex: $problemIndex,
-                           showMenu:$showMenu)
-        } else if (showMenuChapter > -1) {
-          MenuRowsSections(showMenuChapter: $showMenuChapter,
-                           showMenuSection: $showMenuSection,
-                           sectionIndex: $sectionIndex,
-                           showMenuChapterList: $showMenuChapterList)
-        } else {
-          MenuRowsTopLevel(showMenu: $showMenu,
+        } else if showMenuSection != nil {
+          MenuRowsProblems(index:$index,
+                           showMenu:$showMenu,
+                           showMenuChapter: showMenuChapter!,  // todo? force unwrap
+                           showMenuSection: showMenuSection!)  // todo? force unwrap
+        } else if showMenuChapter != nil {
+          MenuRowsSections(showMenuSection: $showMenuSection,
                            showMenuChapterList: $showMenuChapterList,
-                           chapterIndex: $chapterIndex,
-                           sectionIndex: $sectionIndex,
-                           problemIndex: $problemIndex)
+                           showMenuChapter: showMenuChapter!)  // todo? force unwrap
+        } else {
+          MenuRowsTopLevel(index: $index,
+                           showMenu: $showMenu,
+                           showMenuChapterList: $showMenuChapterList)
         }
         Spacer()
     }

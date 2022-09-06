@@ -32,7 +32,8 @@ for sectionInteger in [2, 3, 10, 5, 0, 1]: # "squares"
     new_section = {
         "sectionTitle": f'Multiplication by {sectionInteger} (in order)',
         "id": section_id,
-        "problemIDs": []
+        "problemIDs": [],
+        "inOrder": True
     }
     curriculum["chapters"][0]["sections"].append(new_section)
     for multiplier in [1, 2, 3, 4, 5, 6, 7, 8, 9]:
@@ -44,7 +45,9 @@ for sectionInteger in [2, 3, 10, 5, 0, 1]: # "squares"
     new_section_random = {
         "sectionTitle": f'Multiplication by {sectionInteger} (random)',
         "id": section_id,
-        "problemIDs": []
+        "problemIDs": [],
+        "inOrder": False
+
     }
     curriculum["chapters"][0]["sections"].append(new_section_random)
     new_section_random["problemIDs"] = random.sample(new_section["problemIDs"], len(new_section["problemIDs"]))

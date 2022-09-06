@@ -8,6 +8,7 @@ This is an app for iPad to teach kids math, egged on by lots of little videos.
    * show scorecard on completion
  * bug: selecting problem in menu before hitting continue leads to weird state
  * animation between scetion and chapter complete
+ * style: keep problem to be done in same place when showing last problem?
  
 ### Todo Later/Maybe
  * Bugs
