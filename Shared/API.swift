@@ -119,7 +119,7 @@ class API {
     for record in records {
       if (record.chapterID == chapterID && record.sectionID == section.id) {
         if answerMap[record.problemID] != nil {
-          if API.answerRecordHasCorrectAnswer(record: record, problem: curriculum.problems.first(where: {$0.id == record.problemID})) {
+          if API.answerRecordHasCorrectAnswer(record: record, problem:  API.problemForID(problemID: record.problemID)) {
             answerMap[record.problemID] = true
           }
         }
